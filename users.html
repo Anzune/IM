@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+        <!-- solar--exit-bold (logout icon — shared with reserve.html) -->
+        <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+        </symbol>
+
+        <!-- fluent--person-12-filled (page title icon) -->
+        <symbol id="fluent--person-12-filled" viewBox="0 0 12 12">
+            <path fill="currentColor" d="M6 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm-3 1.5A1.5 1.5 0 0 0 1.5 9c0 1.38 1.343 2.5 4.5 2.5S10.5 10.38 10.5 9A1.5 1.5 0 0 0 9 7.5H3Z"/>
+        </symbol>
+
+        <!-- maki--college (course/year icon) -->
+        <symbol id="maki--college" viewBox="0 0 15 15">
+            <path fill="currentColor" d="M7.5 0L0 4l7.5 4L15 4Zm0 9.333L1 5.667V10c0 .552 2.91 2.5 6.5 2.5S14 10.552 14 10V5.667ZM7.5 15a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5Z"/>
+        </symbol>
+
+        <!-- flowbite--edit-solid (edit profile icon) -->
+        <symbol id="flowbite--edit-solid" viewBox="0 0 24 24">
+            <path fill="currentColor" fill-rule="evenodd" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 19.882 3.895 21 5 21h11c1.105 0 2-1.118 2-2.294v-7.294l-3.72 3.72c-.505.505-1.17.787-1.887.797l-1.947.028a1.012 1.012 0 0 1-1.021-1.02l.028-1.948c.01-.718.292-1.382.796-1.887L11.32 6.176ZM15.854 3.32a2.118 2.118 0 0 1 2.994 2.994l-.944.944-2.994-2.994.944-.944Zm-1.944 1.944L7.032 12.14a.502.502 0 0 0-.14.342l-.016 1.066 1.067-.015a.506.506 0 0 0 .342-.14l6.877-6.877-2.994-2.994-.258.843Z" clip-rule="evenodd"/>
+        </symbol>
+
+        <!-- tabler--trash-filled (delete icon) -->
+        <symbol id="tabler--trash-filled" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M20 6a1 1 0 0 1 .117 1.993l-.117.007H19l-.001 1.14c.94.208 1.84.568 2.67 1.063a1 1 0 1 1-1.004 1.728 8 8 0 1 0-9.33.0a1 1 0 1 1-1.006-1.727A10.027 10.027 0 0 1 13 9.14V8H4a1 1 0 0 1-.117-1.993L4 6h16ZM13.996 2a2 2 0 0 1 1.985 1.752l.015.25L16 5H8l.001-1a2 2 0 0 1 1.751-1.994L10 2h4Z"/>
+        </symbol>
+
+        <!-- si--alert-fill (account deletion modal warning icon) -->
+        <symbol id="si--alert-fill" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </symbol>
+
+    </svg>
+
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="brand">
+                <div class="brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </div>
+                <span class="brand-name">Silid Isko</span>
+            </div>
+            <button class="menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <a href="home.html" class="back-link">&#8249; Back to homepage</a>
+
+        <div class="page-title">
+            <div class="page-title-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><use href="#fluent--person-12-filled"/></svg>
+            </div>
+            <div>
+                <h1>User<br>Account</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- ══ MODAL 1: HEADER MENU MODAL ════════════════════════════════════ -->
+    <div class="gm-overlay" id="menu-modal-overlay"></div>
+    <div class="gm-sheet menu-modal-sheet" id="menu-modal-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="gm-handle"></div>
+        <ul class="menu-modal-nav">
+            <li><a href="users.html">USER PROFILE</a></li>
+            <li><a href="myreserve.html">RESERVATIONS</a></li>
+        </ul>
+        <div class="menu-modal-footer">
+            <button class="menu-modal-logout-btn" id="menu-modal-logout-btn">Log out</button>
+        </div>
+    </div>
+
+    <!-- ══ MODAL 2: CONFIRM LOGOUT MODAL ════════════════════════════════ -->
+    <div class="gm-overlay" id="logout-modal-overlay"></div>
+    <div class="gm-sheet logout-modal-sheet" id="logout-modal-sheet" role="dialog" aria-modal="true" aria-label="Confirm logout">
+        <div class="gm-handle"></div>
+        <div class="logout-modal-hero">
+            <div class="logout-modal-hero-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#solar--exit-bold"/></svg>
+            </div>
+            <div class="logout-modal-hero-title">Logging out?</div>
+        </div>
+        <p class="logout-modal-subtext">Are you sure you want to end your session and return to the main landing page?</p>
+        <div class="logout-modal-actions">
+            <button class="logout-modal-cancel-btn" id="logout-modal-cancel-btn">Cancel</button>
+            <a href="index.html" class="logout-modal-confirm-btn">Log out</a>
+        </div>
+    </div>
+
+    <!-- ═════════════════════════════════════
+         MAIN SCROLL AREA
+    ═════════════════════════════════════ -->
+    <main class="up-scroll">
+
+        <!-- ── PROFILE CARD ──────────────────────────────────────────── -->
+        <div class="up-card up-profile-card">
+            <div class="up-avatar">
+                <!-- Inline SVG avatar silhouette — no external image dependency -->
+                <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" fill="#aaa">
+                    <circle cx="40" cy="28" r="16"/>
+                    <ellipse cx="40" cy="65" rx="26" ry="18"/>
+                </svg>
+            </div>
+            <div class="up-profile-info">
+                <p class="up-profile-name" id="pc-fullname">—</p>
+                <div class="up-profile-meta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 15 15"><use href="#maki--college"/></svg>
+                    <span id="pc-course">—</span>
+                </div>
+                <div class="up-profile-meta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 15 15"><use href="#maki--college"/></svg>
+                    <span id="pc-year-section">—</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── EDIT CARD ──────────────────────────────────────────────── -->
+        <div class="up-card up-edit-card">
+            <div class="up-edit-btn-row" id="edit-btn-row">
+                <!-- Default: single Edit Profile button -->
+                <button class="up-edit-btn" id="edit-profile-btn" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#flowbite--edit-solid"/></svg>
+                    EDIT PROFILE
+                </button>
+            </div>
+        </div>
+
+        <!-- ── PERSONAL INFORMATION CARD ─────────────────────────────── -->
+        <p class="up-section-label">PERSONAL INFORMATION</p>
+        <div class="up-card" id="personal-card">
+
+            <div class="up-info-row">
+                <span class="up-info-label">LAST NAME</span>
+                <div>
+                    <div class="up-info-value-wrap">
+                        <span class="up-info-value" id="disp-lname">—</span>
+                        <input class="up-edit-input" id="edit-lname" type="text" autocomplete="off" style="display:none;" maxlength="60">
+                    </div>
+                    <div class="up-field-error" id="err-lname">Enter a valid last name.</div>
+                </div>
+            </div>
+
+            <div class="up-info-row">
+                <span class="up-info-label">FIRST NAME</span>
+                <div>
+                    <div class="up-info-value-wrap">
+                        <span class="up-info-value" id="disp-fname">—</span>
+                        <input class="up-edit-input" id="edit-fname" type="text" autocomplete="off" style="display:none;" maxlength="60">
+                    </div>
+                    <div class="up-field-error" id="err-fname">Enter a valid first name.</div>
+                </div>
+            </div>
+
+            <div class="up-info-row">
+                <span class="up-info-label">YEAR</span>
+                <div>
+                    <div class="up-info-value-wrap">
+                        <span class="up-info-value" id="disp-year">—</span>
+                        <select class="up-edit-select" id="edit-year" style="display:none;">
+                            <option value="">— select —</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input class="up-edit-input" id="edit-year-other" type="text" placeholder="e.g. 4th Year" autocomplete="off" style="display:none;" maxlength="20">
+                    </div>
+                    <div class="up-field-error" id="err-year">Please select or enter a year.</div>
+                </div>
+            </div>
+
+            <div class="up-info-row">
+                <span class="up-info-label">SECTION</span>
+                <div>
+                    <div class="up-info-value-wrap">
+                        <span class="up-info-value" id="disp-section">—</span>
+                        <select class="up-edit-select" id="edit-section" style="display:none;">
+                            <option value="">— select —</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <input class="up-edit-input" id="edit-section-other" type="text" placeholder="e.g. 10" autocomplete="off" style="display:none;" maxlength="10">
+                    </div>
+                    <div class="up-field-error" id="err-section">Please select or enter a section.</div>
+                </div>
+            </div>
+
+            <div class="up-info-row">
+                <span class="up-info-label">COURSE</span>
+                <div>
+                    <div class="up-info-value-wrap">
+                        <span class="up-info-value" id="disp-course">—</span>
+                        <select class="up-edit-select" id="edit-course" style="display:none;">
+                            <option value="">— select —</option>
+                            <option value="Diploma in Civil Engineering Technology (DCvET)">Diploma in Civil Engineering Technology (DCvET)</option>
+                            <option value="Diploma in Computer Engineering Technology (DCET)">Diploma in Computer Engineering Technology (DCET)</option>
+                            <option value="Diploma in Electrical Engineering Technology (DEET)">Diploma in Electrical Engineering Technology (DEET)</option>
+                            <option value="Diploma in Electronics Communications Engineering Technology (DECET)">Diploma in Electronics Communications Engineering Technology (DECET)</option>
+                            <option value="Diploma in Information Communication Technology (DICT)">Diploma in Information Communication Technology (DICT)</option>
+                            <option value="Diploma in Mechanical Engineering Technology (DMET)">Diploma in Mechanical Engineering Technology (DMET)</option>
+                            <option value="Diploma in Office Management Technology (DOMT)">Diploma in Office Management Technology (DOMT)</option>
+                            <option value="Diploma in Railway Engineering Technology (DRET)">Diploma in Railway Engineering Technology (DRET)</option>
+                        </select>
+                    </div>
+                    <div class="up-field-error" id="err-course">Please select a course.</div>
+                </div>
+            </div>
+
+        </div><!-- /personal-card -->
+
+        <!-- ── SECURITY INFORMATION CARD ─────────────────────────────── -->
+        <p class="up-section-label">SECURITY INFORMATION</p>
+        <div class="up-card">
+
+            <div class="up-info-row">
+                <span class="up-info-label">REGISTERED EMAIL</span>
+                <span class="up-info-value" id="disp-email">—</span>
+            </div>
+
+            <div class="up-info-row">
+                <span class="up-info-label">PASSWORD</span>
+                <div class="up-info-value-wrap">
+                    <span class="up-info-value" id="disp-password">••••••••••••</span>
+                    <button class="up-toggle-btn" id="toggle-password" type="button" aria-label="Toggle password visibility">
+                        <iconify-icon icon="mingcute:eye-line" id="icon-pw-show" width="18" height="18"></iconify-icon>
+                        <iconify-icon icon="mingcute:eye-close-line" id="icon-pw-hide" width="18" height="18" style="display:none;"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="up-info-row">
+                <span class="up-info-label" id="label-secq">SECURITY QUESTION</span>
+                <div class="up-info-value-wrap">
+                    <span class="up-info-value" id="disp-secanswer">••••••••••••</span>
+                    <button class="up-toggle-btn" id="toggle-secans" type="button" aria-label="Toggle security answer visibility">
+                        <iconify-icon icon="mingcute:eye-line" id="icon-sa-show" width="18" height="18"></iconify-icon>
+                        <iconify-icon icon="mingcute:eye-close-line" id="icon-sa-hide" width="18" height="18" style="display:none;"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── DELETE ACCOUNT CARD ────────────────────────────────────── -->
+        <div class="up-card up-delete-card">
+            <button class="up-delete-btn" id="open-del-modal-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#tabler--trash-filled"/></svg>
+                DELETE ACCOUNT
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ══ MODAL 3: ACCOUNT DELETION MODAL ═══════════════ -->
+    <div class="up-del-overlay" id="del-modal-overlay"></div>
+    <div class="up-del-sheet" id="del-modal-sheet" role="dialog" aria-modal="true" aria-label="Account Deletion">
+        <div class="up-del-handle"></div>
+
+        <!-- Red hero card -->
+        <div class="up-del-hero">
+            <div class="up-del-hero-top">
+                <div class="up-del-hero-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#si--alert-fill"/></svg>
+                </div>
+                <div class="up-del-hero-title">Account<br>Deletion</div>
+            </div>
+            <div class="up-del-hero-sub">
+                Are you sure you want to delete your account? All your reservation <strong>history and profile data will be permanently removed.</strong>
+            </div>
+        </div>
+
+        <!-- Email verification field -->
+        <label class="up-del-field-label" for="del-email-input">Verify with Email</label>
+        <input class="up-del-email-input" id="del-email-input" type="email" placeholder="" autocomplete="off">
+        <div class="up-del-email-error" id="del-email-error">Please enter the email address registered to this account.</div>
+
+        <!-- Confirm button -->
+        <button class="up-del-confirm-btn" id="del-confirm-btn" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#tabler--trash-filled"/></svg>
+            DELETE ACCOUNT
+        </button>
+
+        <!-- Cancel button -->
+        <button class="up-del-cancel-btn" id="del-cancel-btn" type="button">Cancel</button>
+    </div>
+
+    <script>
+    'use strict';
+
+    /* ═══════════════════════════════════════════════════════════════════
+       USER DATA OBJECT
+       TODO: Replace hardcoded values with session data from PHP/MS SQL.
+             e.g. fetch('/api/user/me') and populate this object on load.
+    ═══════════════════════════════════════════════════════════════════ */
+    const userData = {
+        firstName:      'FirstName',
+        lastName:       'LastName',
+        year:           '2nd Year',
+        section:        '5',
+        course:         'Diploma in Information Communication Technology (DICT)',
+        email:          'firstname@gmail.com',
+        password:       'password123',
+        securityQuestion: 'What city were you born in?',
+        securityAnswer:   'Manila',
+    };
+
+    /* ─── Derived display values ─────────────────────────────────────── */
+    function censorEmail(email) {
+        const at = email.indexOf('@');
+        if (at <= 0) return email;
+        const local  = email.slice(0, at);
+        const domain = email.slice(at);
+        const visible = local.slice(0, 3).toUpperCase();
+        return `${visible}****${domain.toUpperCase()}`;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RENDER — populate display elements from userData
+    ═══════════════════════════════════════════════════════════════════ */
+    function renderProfile() {
+        // Profile card
+        document.getElementById('pc-fullname').textContent    = `${userData.lastName}, ${userData.firstName}`;
+        document.getElementById('pc-course').textContent      = userData.course;
+        document.getElementById('pc-year-section').textContent = `${userData.year} • Section ${userData.section}`;
+
+        // Personal info card display values
+        document.getElementById('disp-lname').textContent   = userData.lastName;
+        document.getElementById('disp-fname').textContent   = userData.firstName;
+        document.getElementById('disp-year').textContent    = userData.year;
+        document.getElementById('disp-section').textContent = userData.section;
+        document.getElementById('disp-course').textContent  = userData.course;
+
+        // Security card
+        document.getElementById('disp-email').textContent   = censorEmail(userData.email);
+        // Password and security answer default to bullets — toggled by buttons
+        document.getElementById('disp-password').textContent  = '••••••••••••';
+        document.getElementById('disp-secanswer').textContent = '••••••••••••';
+
+        // Security question label
+        document.getElementById('label-secq').textContent = `SECURITY QUESTION: ${userData.securityQuestion}`;
+    }
+
+    renderProfile();
+
+    /* ═══════════════════════════════════════════════════════════════════
+       PASSWORD / SECURITY ANSWER TOGGLES
+    ═══════════════════════════════════════════════════════════════════ */
+    function makeToggle(btnId, dispId, showIconId, hideIconId, secretValue) {
+        let revealed = false;
+        document.getElementById(btnId).addEventListener('click', () => {
+            revealed = !revealed;
+            document.getElementById(dispId).textContent = revealed ? secretValue : '••••••••••••';
+            document.getElementById(showIconId).style.display = revealed ? 'none' : '';
+            document.getElementById(hideIconId).style.display = revealed ? ''     : 'none';
+        });
+    }
+
+    makeToggle('toggle-password', 'disp-password', 'icon-pw-show', 'icon-pw-hide', userData.password);
+    makeToggle('toggle-secans',   'disp-secanswer', 'icon-sa-show', 'icon-sa-hide', userData.securityAnswer);
+
+    /* ═══════════════════════════════════════════════════════════════════
+       EDIT MODE
+    ═══════════════════════════════════════════════════════════════════ */
+    let editMode = false;
+
+    /* Helpers */
+    function showEl(id)  { document.getElementById(id).style.display = '';     }
+    function hideEl(id)  { document.getElementById(id).style.display = 'none'; }
+    function showEls(...ids) { ids.forEach(showEl); }
+    function hideEls(...ids) { ids.forEach(hideEl); }
+
+    function setError(errId, inputEl, show) {
+        const err = document.getElementById(errId);
+        if (show) {
+            err.classList.add('visible');
+            inputEl.classList.add('error');
+        } else {
+            err.classList.remove('visible');
+            inputEl.classList.remove('error');
+        }
+    }
+
+    /* Determine whether the year field is using "Other" text input */
+    function yearIsOther() {
+        return document.getElementById('edit-year').style.display === 'none';
+    }
+    function sectionIsOther() {
+        return document.getElementById('edit-section').style.display === 'none';
+    }
+
+    /* Enter edit mode */
+    function enterEditMode() {
+        editMode = true;
+
+        // Populate edit inputs from userData (snapshot)
+        document.getElementById('edit-lname').value = userData.lastName;
+        document.getElementById('edit-fname').value = userData.firstName;
+
+        // Year: check if stored value matches a preset option
+        const yearSel = document.getElementById('edit-year');
+        const yearOpts = ['1st Year','2nd Year','3rd Year'];
+        if (yearOpts.includes(userData.year)) {
+            yearSel.value = userData.year;
+            showEl('edit-year');
+            hideEl('edit-year-other');
+        } else {
+            yearSel.value = 'Other';
+            document.getElementById('edit-year-other').value = userData.year;
+            hideEl('edit-year');
+            showEl('edit-year-other');
+        }
+
+        // Section: check if stored value matches preset options (1-9)
+        const secSel = document.getElementById('edit-section');
+        const secOpts = ['1','2','3','4','5','6','7','8','9'];
+        if (secOpts.includes(userData.section)) {
+            secSel.value = userData.section;
+            showEl('edit-section');
+            hideEl('edit-section-other');
+        } else {
+            secSel.value = 'Other';
+            document.getElementById('edit-section-other').value = userData.section;
+            hideEl('edit-section');
+            showEl('edit-section-other');
+        }
+
+        // Course
+        document.getElementById('edit-course').value = userData.course;
+
+        // Show inputs, hide display spans
+        ['disp-lname','disp-fname','disp-year','disp-section','disp-course'].forEach(hideEl);
+        ['edit-lname','edit-fname'].forEach(showEl);
+        // Year / section already handled above
+        showEl('edit-course');
+
+        // Swap button row
+        renderEditButtons();
+    }
+
+    /* Exit edit mode (discard or after save) */
+    function exitEditMode() {
+        editMode = false;
+
+        // Hide inputs
+        ['edit-lname','edit-fname','edit-year','edit-year-other',
+         'edit-section','edit-section-other','edit-course'].forEach(hideEl);
+
+        // Show display spans
+        ['disp-lname','disp-fname','disp-year','disp-section','disp-course'].forEach(showEl);
+
+        // Clear errors
+        ['err-lname','err-fname','err-year','err-section','err-course'].forEach(id => {
+            document.getElementById(id).classList.remove('visible');
+        });
+        ['edit-lname','edit-fname','edit-year','edit-year-other',
+         'edit-section','edit-section-other','edit-course'].forEach(id => {
+            document.getElementById(id).classList.remove('error');
+        });
+
+        renderEditButtons();
+    }
+
+    /* Render edit card buttons depending on mode */
+    function renderEditButtons() {
+        const row = document.getElementById('edit-btn-row');
+        if (!editMode) {
+            row.innerHTML = `
+                <button class="up-edit-btn" id="edit-profile-btn" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#flowbite--edit-solid"/></svg>
+                    EDIT PROFILE
+                </button>`;
+            document.getElementById('edit-profile-btn').addEventListener('click', enterEditMode);
+        } else {
+            row.innerHTML = `
+                <button class="up-discard-btn" id="discard-btn" type="button">✕ Discard</button>
+                <button class="up-save-btn"    id="save-btn"    type="button">✓ Save Changes</button>`;
+            document.getElementById('discard-btn').addEventListener('click', () => {
+                renderProfile();
+                exitEditMode();
+            });
+            document.getElementById('save-btn').addEventListener('click', saveChanges);
+        }
+    }
+
+    /* Year "Other" conditional */
+    document.getElementById('edit-year').addEventListener('change', function() {
+        if (this.value === 'Other') {
+            hideEl('edit-year');
+            showEl('edit-year-other');
+            document.getElementById('edit-year-other').focus();
+        }
+    });
+    document.getElementById('edit-year-other').addEventListener('input', function() {
+        if (!this.value.trim()) {
+            hideEl('edit-year-other');
+            document.getElementById('edit-year').value = '';
+            showEl('edit-year');
+        }
+    });
+
+    /* Section "Other" conditional */
+    document.getElementById('edit-section').addEventListener('change', function() {
+        if (this.value === 'Other') {
+            hideEl('edit-section');
+            showEl('edit-section-other');
+            document.getElementById('edit-section-other').focus();
+        }
+    });
+    document.getElementById('edit-section-other').addEventListener('input', function() {
+        if (!this.value.trim()) {
+            hideEl('edit-section-other');
+            document.getElementById('edit-section').value = '';
+            showEl('edit-section');
+        }
+    });
+
+    /* Clear errors on input */
+    ['edit-lname','edit-fname','edit-year','edit-year-other',
+     'edit-section','edit-section-other','edit-course'].forEach(id => {
+        document.getElementById(id).addEventListener('input', () => {
+            document.getElementById(id).classList.remove('error');
+        });
+        document.getElementById(id).addEventListener('change', () => {
+            document.getElementById(id).classList.remove('error');
+        });
+    });
+
+    /* Validate and save */
+    function saveChanges() {
+        let valid = true;
+
+        const lname = document.getElementById('edit-lname').value.trim();
+        if (!lname) { setError('err-lname', document.getElementById('edit-lname'), true); valid = false; }
+        else         setError('err-lname', document.getElementById('edit-lname'), false);
+
+        const fname = document.getElementById('edit-fname').value.trim();
+        if (!fname) { setError('err-fname', document.getElementById('edit-fname'), true); valid = false; }
+        else         setError('err-fname', document.getElementById('edit-fname'), false);
+
+        let year = '';
+        if (yearIsOther()) {
+            year = document.getElementById('edit-year-other').value.trim();
+            if (!year) { setError('err-year', document.getElementById('edit-year-other'), true); valid = false; }
+            else         setError('err-year', document.getElementById('edit-year-other'), false);
+        } else {
+            year = document.getElementById('edit-year').value;
+            if (!year) { setError('err-year', document.getElementById('edit-year'), true); valid = false; }
+            else         setError('err-year', document.getElementById('edit-year'), false);
+        }
+
+        let section = '';
+        if (sectionIsOther()) {
+            section = document.getElementById('edit-section-other').value.trim();
+            if (!section) { setError('err-section', document.getElementById('edit-section-other'), true); valid = false; }
+            else            setError('err-section', document.getElementById('edit-section-other'), false);
+        } else {
+            section = document.getElementById('edit-section').value;
+            if (!section) { setError('err-section', document.getElementById('edit-section'), true); valid = false; }
+            else            setError('err-section', document.getElementById('edit-section'), false);
+        }
+
+        const course = document.getElementById('edit-course').value;
+        if (!course) { setError('err-course', document.getElementById('edit-course'), true); valid = false; }
+        else           setError('err-course', document.getElementById('edit-course'), false);
+
+        if (!valid) return;
+
+        /* All valid — commit to userData */
+        userData.lastName  = lname;
+        userData.firstName = fname;
+        userData.year      = year;
+        userData.section   = section;
+        userData.course    = course;
+
+        /* TODO: Send updated data to PHP/MS SQL endpoint
+                 e.g. fetch('/api/user/update', { method:'POST', body: JSON.stringify(userData) }) */
+
+        renderProfile();
+        exitEditMode();
+    }
+
+    /* Attach initial edit button listener */
+    document.getElementById('edit-profile-btn').addEventListener('click', enterEditMode);
+
+    /* ═══════════════════════════════════════════════════════════════════
+       ACCOUNT DELETION MODAL
+    ═══════════════════════════════════════════════════════════════════ */
+    const delOverlay = document.getElementById('del-modal-overlay');
+    const delSheet   = document.getElementById('del-modal-sheet');
+
+    function openDelModal() {
+        document.getElementById('del-email-input').value = '';
+        document.getElementById('del-email-error').classList.remove('visible');
+        document.getElementById('del-email-input').classList.remove('error');
+        const btn = document.getElementById('del-confirm-btn');
+        btn.disabled = false;
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#tabler--trash-filled"/></svg> DELETE ACCOUNT`;
+
+        delOverlay.classList.add('open');
+        delSheet.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDelModal() {
+        delOverlay.classList.remove('open');
+        delSheet.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('open-del-modal-btn').addEventListener('click', openDelModal);
+    document.getElementById('del-cancel-btn').addEventListener('click', closeDelModal);
+    delOverlay.addEventListener('click', closeDelModal);
+
+    /* Confirm deletion */
+    document.getElementById('del-confirm-btn').addEventListener('click', () => {
+        const emailInput = document.getElementById('del-email-input');
+        const emailErr   = document.getElementById('del-email-error');
+        const emailVal   = emailInput.value.trim();
+
+        // Validate: not empty, valid email format, matches userData.email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let errMsg = '';
+
+        if (!emailVal) {
+            errMsg = 'Please enter your registered email address.';
+        } else if (!emailRegex.test(emailVal)) {
+            errMsg = 'Please enter a valid email address format.';
+        } else if (emailVal.toLowerCase() !== userData.email.toLowerCase()) {
+            errMsg = 'Email does not match the registered account email.';
+        }
+
+        if (errMsg) {
+            emailErr.textContent = errMsg;
+            emailErr.classList.add('visible');
+            emailInput.classList.add('error');
+            return;
+        }
+
+        emailErr.classList.remove('visible');
+        emailInput.classList.remove('error');
+
+        /* Valid — simulate deletion */
+        const confirmBtn = document.getElementById('del-confirm-btn');
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Deleting…';
+
+        /* TODO: Call PHP/MS SQL deletion endpoint here
+                 e.g. fetch('/api/user/delete', { method:'DELETE' })
+                      .then(() => window.location.href = 'index.html') */
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
+    });
+
+    /* Clear error on email input */
+    document.getElementById('del-email-input').addEventListener('input', function() {
+        this.classList.remove('error');
+        document.getElementById('del-email-error').classList.remove('visible');
+    });
+
+    /* ── Menu modal ──────────────────────────────────────────────────── */
+    (function initMenuModal() {
+        const menuBtn       = document.querySelector('.menu-btn');
+        const menuOverlay   = document.getElementById('menu-modal-overlay');
+        const menuSheet     = document.getElementById('menu-modal-sheet');
+        const logoutTrigger = document.getElementById('menu-modal-logout-btn');
+
+        function openMenuModal() {
+            menuOverlay.classList.add('open');
+            menuSheet.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenuModal() {
+            menuOverlay.classList.remove('open');
+            menuSheet.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', openMenuModal);
+        menuOverlay.addEventListener('click', closeMenuModal);
+
+        logoutTrigger.addEventListener('click', function() {
+            closeMenuModal();
+            setTimeout(openLogoutModal, 180);
+        });
+    })();
+
+    /* ── Logout confirm modal ────────────────────────────────────────── */
+    function openLogoutModal() {
+        const logoutOverlay = document.getElementById('logout-modal-overlay');
+        const logoutSheet   = document.getElementById('logout-modal-sheet');
+        logoutOverlay.classList.add('open');
+        logoutSheet.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    (function initLogoutModal() {
+        const logoutOverlay = document.getElementById('logout-modal-overlay');
+        const logoutSheet   = document.getElementById('logout-modal-sheet');
+        const cancelBtn     = document.getElementById('logout-modal-cancel-btn');
+
+        function closeLogoutModal() {
+            logoutOverlay.classList.remove('open');
+            logoutSheet.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        cancelBtn.addEventListener('click', closeLogoutModal);
+        logoutOverlay.addEventListener('click', closeLogoutModal);
+    })();
+
+    </script>
+</body>
+</html>
+
+<!-- ============================================
+     SUPABASE PROFILE LOADER
+     Add this at the end of users.html
+     ============================================ -->
+<script type="module">
+import { getProfile, updateProfile } from './js/supabase-client.js';
+
+async function loadProfile() {
+    try {
+        const { data: { user } } = await window.supabase.auth.getUser();
+        if (!user) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const profile = await getProfile(user.id);
+        if (!profile) return;
+        
+        // Update userData
+        window.userData = {
+            firstName: profile.first_name,
+            lastName: profile.last_name,
+            year: profile.year_level || 'N/A',
+            section: profile.section || 'N/A',
+            course: profile.course || 'N/A',
+            email: profile.email,
+            password: '••••••••••••',
+            securityQuestion: 'Not set',
+            securityAnswer: 'Not set'
+        };
+        
+        // Re-render profile
+        renderProfile();
+        
+    } catch (error) {
+        console.error('Error loading profile:', error);
+    }
+}
+
+// Override saveChanges
+window.saveChanges = async function() {
+    try {
+        const { data: { user } } = await window.supabase.auth.getUser();
+        if (!user) throw new Error('Not logged in');
+        
+        const lname = document.getElementById('edit-lname').value.trim();
+        const fname = document.getElementById('edit-fname').value.trim();
+        const year = document.getElementById('edit-year').value;
+        const section = document.getElementById('edit-section').value;
+        const course = document.getElementById('edit-course').value;
+        
+        await updateProfile(user.id, {
+            first_name: fname,
+            last_name: lname,
+            year_level: year,
+            section: section,
+            course: course
+        });
+        
+        window.userData.firstName = fname;
+        window.userData.lastName = lname;
+        window.userData.year = year;
+        window.userData.section = section;
+        window.userData.course = course;
+        
+        renderProfile();
+        exitEditMode();
+        alert('✅ Profile updated successfully!');
+        
+    } catch (error) {
+        alert('❌ Error updating profile: ' + error.message);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', loadProfile);
+</script>

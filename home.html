@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 Home // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+    </symbol>
+    </svg>
+</head>
+<body>
+
+    <!-- ── Site Header ─────────────────────────────────────────────── -->
+    <header class="site-header">
+        <div class="header-top">
+            <div class="brand">
+                <span class="brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </span>
+                <span class="brand-name">Silid Isko</span>
+            </div>
+            <button class="menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ══ MODAL 1: HEADER MENU MODAL ════════════════════════════════════ -->
+    <div class="gm-overlay" id="menu-modal-overlay"></div>
+    <div class="gm-sheet menu-modal-sheet" id="menu-modal-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="gm-handle"></div>
+        <ul class="menu-modal-nav">
+            <li><a href="users.html">USER PROFILE</a></li>
+            <li><a href="myreserve.html">RESERVATIONS</a></li>
+        </ul>
+        <div class="menu-modal-footer">
+            <button class="menu-modal-logout-btn" id="menu-modal-logout-btn">Log out</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL 2: CONFIRM LOGOUT MODAL ────────────── -->
+    <div class="gm-overlay" id="logout-modal-overlay"></div>
+    <div class="gm-sheet logout-modal-sheet" id="logout-modal-sheet" role="dialog" aria-modal="true" aria-label="Confirm logout">
+        <div class="gm-handle"></div>
+        <div class="logout-modal-hero">
+            <div class="logout-modal-hero-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#solar--exit-bold" /></svg>
+            </div>
+            <div class="logout-modal-hero-title">Logging out?</div>
+        </div>
+        <p class="logout-modal-subtext">Are you sure you want to end your session and return to the main landing page?</p>
+        <div class="logout-modal-actions">
+            <button class="logout-modal-cancel-btn" id="logout-modal-cancel-btn">Cancel</button>
+            <a href="index.html" class="logout-modal-confirm-btn">Log out</a>
+        </div>
+    </div>
+
+    <!-- ── Main Scroll Area ─────────────────────────────────────────── -->
+    <main class="home-scroll">
+
+        <!-- Card 1: Greeting Card -->
+        <div class="home-greeting-card">
+            <div class="greeting-avatar">
+                <iconify-icon icon="fluent:person-12-filled" width="50" height="50"></iconify-icon>
+            </div>
+            <div class="greeting-text">
+                <span class="greeting-label">Welcome back,</span>
+                <span class="greeting-name">User</span>
+            </div>
+        </div>
+
+        <!-- Card 2: Active Reservations Card -->
+        <div class="home-stat-card">
+            <div class="stat-text">
+                <span class="stat-label">Your active</span>
+                <span class="stat-title">reservations:</span>
+            </div>
+            <div class="stat-badge">
+                <span class="stat-number">0</span>
+            </div>
+        </div>
+
+        <!-- Link Cards section label -->
+        <p class="home-section-label">Quick Access</p>
+
+        <!-- Card 3: Room Schedules -->
+        <a href="scheds.html" class="home-link-card">
+            <div class="link-icon-wrap" style="background:#E8F4FD;">
+                <iconify-icon icon="typcn:calendar" width="22" height="22" style="color:#2196F3;"></iconify-icon>
+            </div>
+            <span class="link-label">Check room schedules</span>
+            <iconify-icon icon="mingcute:right-line" width="18" height="18" class="link-chevron"></iconify-icon>
+        </a>
+
+        <!-- Card 4: Room Reservation -->
+        <a href="reserve.html" class="home-link-card">
+            <div class="link-icon-wrap" style="background:#FFF3CC;">
+                <iconify-icon icon="fluent:note-add-16-filled" width="22" height="22" style="color:#E6B800;"></iconify-icon>
+            </div>
+            <span class="link-label">Reserve a room</span>
+            <iconify-icon icon="mingcute:right-line" width="18" height="18" class="link-chevron"></iconify-icon>
+        </a>
+
+        <!-- Card 5: QR Check-in -->
+        <a href="checkin.html" class="home-link-card">
+            <div class="link-icon-wrap" style="background:#F3E8FD;">
+                <iconify-icon icon="ion:qr-code" width="22" height="22" style="color:#9C27B0;"></iconify-icon>
+            </div>
+            <span class="link-label">Check-in via QR</span>
+            <iconify-icon icon="mingcute:right-line" width="18" height="18" class="link-chevron"></iconify-icon>
+        </a>
+
+        <!-- Card 6: Activity Logs -->
+        <a href="logs.html" class="home-link-card">
+            <div class="link-icon-wrap" style="background:#FDE8E8;">
+                <iconify-icon icon="mingcute:history-fill" width="22" height="22" style="color:#E53935;"></iconify-icon>
+            </div>
+            <span class="link-label">Activity logs</span>
+            <iconify-icon icon="mingcute:right-line" width="18" height="18" class="link-chevron"></iconify-icon>
+        </a>
+
+        <!-- Card 7: Room Availability -->
+        <a href="avail.html" class="home-link-card">
+            <div class="link-icon-wrap" style="background:#D4EDDA;">
+                <iconify-icon icon="material-symbols:map" width="22" height="22" style="color:#4CAF7D;"></iconify-icon>
+            </div>
+            <span class="link-label">See room availability</span>
+            <iconify-icon icon="mingcute:right-line" width="18" height="18" class="link-chevron"></iconify-icon>
+        </a>
+
+    </main>
+
+    <script>
+        // MENU MODAL + LOGOUT MODAL LOGIC
+        (function initMenuModal() {
+            const menuBtn = document.querySelector(".menu-btn");
+            const menuOverlay = document.getElementById("menu-modal-overlay");
+            const menuSheet = document.getElementById("menu-modal-sheet");
+            const logoutTrigger = document.getElementById("menu-modal-logout-btn");
+
+            function openMenuModal() {
+                menuOverlay.classList.add("open");
+                menuSheet.classList.add("open");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeMenuModal() {
+                menuOverlay.classList.remove("open");
+                menuSheet.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+
+            menuBtn.addEventListener("click", openMenuModal);
+            menuOverlay.addEventListener("click", closeMenuModal);
+
+            logoutTrigger.addEventListener("click", function() {
+                closeMenuModal();
+                setTimeout(openLogoutModal, 180);
+            });
+        })();
+
+        function openLogoutModal() {
+            const logoutOverlay = document.getElementById("logout-modal-overlay");
+            const logoutSheet = document.getElementById("logout-modal-sheet");
+            logoutOverlay.classList.add("open");
+            logoutSheet.classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        (function initLogoutModal() {
+            const logoutOverlay = document.getElementById("logout-modal-overlay");
+            const logoutSheet = document.getElementById("logout-modal-sheet");
+            const cancelBtn = document.getElementById("logout-modal-cancel-btn");
+
+            function closeLogoutModal() {
+                logoutOverlay.classList.remove("open");
+                logoutSheet.classList.remove("open");
+                document.body.style.overflow = "";
+            }
+
+            cancelBtn.addEventListener("click", closeLogoutModal);
+            logoutOverlay.addEventListener("click", closeLogoutModal);
+        })();
+
+        // ============================================
+        // SUPABASE HOME DATA
+        // ============================================
+        (async function loadHomeData() {
+            try {
+                const supabase = window.supabase;
+                if (!supabase) {
+                    console.warn('Supabase not loaded yet, waiting...');
+                    // Wait for Supabase to load
+                    await new Promise(resolve => {
+                        const checkSupabase = setInterval(() => {
+                            if (window.supabase) {
+                                clearInterval(checkSupabase);
+                                resolve();
+                            }
+                        }, 100);
+                    });
+                }
+
+                const { data: { user } } = await window.supabase.auth.getUser();
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Get user profile
+                const { data: profile, error: profileError } = await window.supabase
+                    .from('profiles')
+                    .select('first_name, last_name')
+                    .eq('id', user.id)
+                    .single();
+
+                if (profileError) throw profileError;
+
+                // Update greeting
+                if (profile) {
+                    document.querySelector('.greeting-name').textContent = profile.first_name || 'User';
+                }
+
+                // Count active reservations
+                const { data: reservations, error: resError } = await window.supabase
+                    .from('reservations')
+                    .select('id')
+                    .eq('user_id', user.id)
+                    .in('status', ['pending', 'confirmed'])
+                    .gte('reservation_date', new Date().toISOString().split('T')[0]);
+
+                if (resError) throw resError;
+
+                document.querySelector('.stat-number').textContent = reservations ? reservations.length : 0;
+
+            } catch (error) {
+                console.error('Error loading home data:', error);
+            }
+        })();
+    </script>
+</body>
+</html>

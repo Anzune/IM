@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="brand--room" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3 21V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16h-2V5H5v16H3zm4 0v-6h10v6H7zm2-2h6v-2H9v2zm3-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </symbol>
+        <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+        </symbol>
+    </svg>
+</head>
+
+<body class="login-page-body">
+
+    <!-- ── Site Header ─────────────────── -->
+    <header class="landing-site-header">
+        <div class="landing-header-top">
+            <div class="landing-brand">
+                <span class="landing-brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </span>
+                <span class="landing-brand-name">Silid Isko</span>
+            </div>
+            <button class="landing-menu-btn" aria-label="Menu" id="landing-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ── MODAL 1: LANDING HEADER MENU MODAL ──────────────────────── -->
+    <div class="lm-overlay" id="landing-menu-overlay"></div>
+    <div class="lm-sheet" id="landing-menu-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="lm-handle"></div>
+        <ul class="landing-menu-nav">
+            <li><button id="open-about-btn">ABOUT US</button></li>
+            <li><button id="open-contact-btn">CONTACT US</button></li>
+        </ul>
+        <div class="landing-menu-footer">
+            <button class="landing-menu-back-btn" id="landing-menu-back-btn">Back to Landing Page</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL 2: ABOUT US ───────────────────────────────────────── -->
+    <div class="lm-overlay" id="about-overlay"></div>
+    <div class="lm-sheet" id="about-sheet" role="dialog" aria-modal="true" aria-label="About Us">
+        <div class="lm-handle"></div>
+        <p class="lm-info-title">About Us</p>
+        <p class="lm-info-body">Silid Isko is a campus room management system built for ITECH students. More details coming soon.</p>
+        <button class="lm-info-close-btn" id="about-close-btn">Got it</button>
+    </div>
+
+    <!-- ── MODAL 3: CONTACT US ─────────────────────────────────────── -->
+    <div class="lm-overlay" id="contact-overlay"></div>
+    <div class="lm-sheet" id="contact-sheet" role="dialog" aria-modal="true" aria-label="Contact Us">
+        <div class="lm-handle"></div>
+        <p class="lm-info-title">Contact Us</p>
+        <p class="lm-info-body">For questions or concerns, reach out to the Silid Isko team. Contact details coming soon.</p>
+        <button class="lm-info-close-btn" id="contact-close-btn">Got it</button>
+    </div>
+
+    <!-- ── Login Content ───────────────────────────────────────────── -->
+    <main class="login-content">
+        <div class="login-form-card">
+            <p class="login-title">Log in</p>
+
+            <!-- General error banner -->
+            <div class="login-general-error" id="login-general-error" role="alert">
+                Incorrect email or password. Please try again.
+            </div>
+
+            <!-- ── Email Address Field ──────────────────────────────── -->
+            <div class="login-field-group">
+                <label class="login-field-label" for="login-email">Email address</label>
+                <input
+                    class="login-field-input"
+                    type="email"
+                    id="login-email"
+                    name="email"
+                    autocomplete="email"
+                    inputmode="email"
+                    placeholder="you@example.com"
+                    maxlength="254"
+                >
+                <span class="login-field-error" id="login-email-error"></span>
+            </div>
+
+            <!-- ── Password Field ───────────────────────────────────── -->
+            <div class="login-field-group">
+                <label class="login-field-label" for="login-password">Password</label>
+                <div class="login-password-wrapper">
+                    <input
+                        class="login-field-input"
+                        type="password"
+                        id="login-password"
+                        name="password"
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        maxlength="128"
+                    >
+                    <button
+                        class="login-pw-toggle"
+                        id="login-pw-toggle"
+                        type="button"
+                        aria-label="Show password"
+                    >
+                        <iconify-icon icon="mingcute:eye-line" width="18" height="18" id="login-pw-icon"></iconify-icon>
+                    </button>
+                </div>
+                <span class="login-field-error" id="login-password-error"></span>
+            </div>
+
+            <!-- ── Remember Me ───────────────────── -->
+            <div class="login-meta-row">
+                <label class="login-remember-label">
+                    <input
+                        class="login-remember-checkbox"
+                        type="checkbox"
+                        id="login-remember"
+                        name="remember"
+                    >
+                    Remember me
+                </label>
+            </div>
+
+            <!-- ── Log In Button ────────────────────────────────────── -->
+            <button class="login-submit-btn" id="login-submit-btn" type="button">
+                Log in
+            </button>
+
+            <!-- ── Sign Up Link ─────────────────────────────────────── -->
+            <div class="login-signup-row">
+                Don't have an account yet?<br>
+                <a href="signup.html" class="login-signup-link" id="login-signup-link">Sign up here.</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // MODAL HELPERS
+        function openSheet(overlayId, sheetId) {
+            document.getElementById(overlayId).classList.add("open");
+            document.getElementById(sheetId).classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSheet(overlayId, sheetId) {
+            document.getElementById(overlayId).classList.remove("open");
+            document.getElementById(sheetId).classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        // Landing Menu Modal
+        (function initLandingMenuModal() {
+            var menuBtn = document.getElementById("landing-menu-btn");
+            var backBtn = document.getElementById("landing-menu-back-btn");
+            var aboutBtn = document.getElementById("open-about-btn");
+            var contactBtn = document.getElementById("open-contact-btn");
+
+            menuBtn.addEventListener("click", function() {
+                openSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            document.getElementById("landing-menu-overlay").addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            backBtn.addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function() { window.location.href = "index.html"; }, 180);
+            });
+
+            aboutBtn.addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function() { openSheet("about-overlay", "about-sheet"); }, 180);
+            });
+
+            contactBtn.addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function() { openSheet("contact-overlay", "contact-sheet"); }, 180);
+            });
+        })();
+
+        // About/Contact modals
+        document.getElementById("about-overlay").addEventListener("click", function() {
+            closeSheet("about-overlay", "about-sheet");
+        });
+        document.getElementById("about-close-btn").addEventListener("click", function() {
+            closeSheet("about-overlay", "about-sheet");
+        });
+        document.getElementById("contact-overlay").addEventListener("click", function() {
+            closeSheet("contact-overlay", "contact-sheet");
+        });
+        document.getElementById("contact-close-btn").addEventListener("click", function() {
+            closeSheet("contact-overlay", "contact-sheet");
+        });
+
+        // Password toggle
+        (function initPasswordToggle() {
+            var toggleBtn = document.getElementById("login-pw-toggle");
+            var pwInput = document.getElementById("login-password");
+            var pwIcon = document.getElementById("login-pw-icon");
+            var isVisible = false;
+
+            toggleBtn.addEventListener("click", function() {
+                isVisible = !isVisible;
+                pwInput.type = isVisible ? "text" : "password";
+                pwIcon.setAttribute("icon", isVisible ? "mingcute:eye-close-line" : "mingcute:eye-line");
+                toggleBtn.setAttribute("aria-label", isVisible ? "Hide password" : "Show password");
+            });
+        })();
+
+        // Field validation helpers
+        function setFieldError(inputEl, errorEl, message) {
+            inputEl.classList.add("error");
+            inputEl.classList.remove("valid");
+            errorEl.textContent = message;
+            errorEl.classList.add("visible");
+        }
+
+        function clearFieldError(inputEl, errorEl) {
+            inputEl.classList.remove("error");
+            errorEl.textContent = "";
+            errorEl.classList.remove("visible");
+        }
+
+        function clearGeneralError() {
+            document.getElementById("login-general-error").classList.remove("visible");
+        }
+
+        function validateEmail(value) {
+            var trimmed = value.trim();
+            if (trimmed === "") return { ok: false, msg: "Email address is required." };
+            if (trimmed.toLowerCase() === "dev") return { ok: true, bypass: true };
+            if (/\s/.test(trimmed)) return { ok: false, msg: "Email must not contain spaces." };
+            var emailPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(trimmed)) return { ok: false, msg: "Enter a valid email address." };
+            return { ok: true };
+        }
+
+        function validatePassword(value) {
+            if (value === "") return { ok: false, msg: "Password is required." };
+            if (value.toLowerCase() === "dev") return { ok: true, bypass: true };
+            if (value.length < 8) return { ok: false, msg: "Password must be at least 8 characters." };
+            return { ok: true };
+        }
+
+        // Live validation
+        (function initLiveValidation() {
+            var emailInput = document.getElementById("login-email");
+            var emailError = document.getElementById("login-email-error");
+            var passwordInput = document.getElementById("login-password");
+            var passwordError = document.getElementById("login-password-error");
+
+            emailInput.addEventListener("input", function() {
+                clearGeneralError();
+                if (emailInput.classList.contains("error")) {
+                    var result = validateEmail(emailInput.value);
+                    if (result.ok) { clearFieldError(emailInput, emailError); }
+                }
+            });
+
+            passwordInput.addEventListener("input", function() {
+                clearGeneralError();
+                if (passwordInput.classList.contains("error")) {
+                    var result = validatePassword(passwordInput.value);
+                    if (result.ok) { clearFieldError(passwordInput, passwordError); }
+                }
+            });
+        })();
+
+        // ============================================
+        // SUPABASE LOGIN
+        // ============================================
+        (function initLoginSubmit() {
+            var submitBtn = document.getElementById("login-submit-btn");
+            var emailInput = document.getElementById("login-email");
+            var emailError = document.getElementById("login-email-error");
+            var passwordInput = document.getElementById("login-password");
+            var passwordError = document.getElementById("login-password-error");
+            var generalError = document.getElementById("login-general-error");
+
+            submitBtn.addEventListener("click", function() {
+                // Bounce animation
+                submitBtn.classList.remove("bounce");
+                void submitBtn.offsetWidth;
+                submitBtn.classList.add("bounce");
+
+                // Validate fields
+                var emailResult = validateEmail(emailInput.value);
+                var passwordResult = validatePassword(passwordInput.value);
+                var hasError = false;
+
+                if (!emailResult.ok) {
+                    setFieldError(emailInput, emailError, emailResult.msg);
+                    hasError = true;
+                } else {
+                    clearFieldError(emailInput, emailError);
+                }
+
+                if (!passwordResult.ok) {
+                    setFieldError(passwordInput, passwordError, passwordResult.msg);
+                    hasError = true;
+                } else {
+                    clearFieldError(passwordInput, passwordError);
+                }
+
+                if (hasError) {
+                    var firstError = document.querySelector(".login-field-input.error");
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+                        firstError.focus();
+                    }
+                    return;
+                }
+
+                // Check dev bypass
+                var isDevBypass = (emailResult.bypass === true && passwordResult.bypass === true);
+
+                if (isDevBypass) {
+                    runLogin();
+                    return;
+                }
+
+                // ── REAL SUPABASE LOGIN ──
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Logging in…";
+
+                import('./js/supabase-client.js')
+                    .then(module => module.signIn(emailInput.value.trim(), passwordInput.value))
+                    .then(() => {
+                        window.location.href = "home.html";
+                    })
+                    .catch(error => {
+                        generalError.textContent = error.message || "Incorrect email or password.";
+                        generalError.classList.add("visible");
+                        passwordInput.value = "";
+                        clearFieldError(passwordInput, passwordError);
+                        passwordInput.focus();
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Log in";
+                    });
+            });
+
+            submitBtn.addEventListener("animationend", function() {
+                submitBtn.classList.remove("bounce");
+            });
+
+            function runLogin() {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Logging in…";
+                setTimeout(function() {
+                    window.location.href = "home.html";
+                }, 900);
+            }
+        })();
+    </script>
+</body>
+</html>

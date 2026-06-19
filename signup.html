@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="brand--room" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3 21V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16h-2V5H5v16H3zm4 0v-6h10v6H7zm2-2h6v-2H9v2zm3-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </symbol>
+        <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+        </symbol>
+    </svg>
+</head>
+
+<body class="signup-page-body">
+
+    <!-- ── Site Header ─────────────────── -->
+    <header class="landing-site-header">
+        <div class="landing-header-top">
+            <div class="landing-brand">
+                <span class="landing-brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </span>
+                <span class="landing-brand-name">Silid Isko</span>
+            </div>
+            <button class="landing-menu-btn" aria-label="Menu" id="landing-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ── MODAL 1: LANDING HEADER MENU MODAL ──────────────────────── -->
+    <div class="lm-overlay" id="landing-menu-overlay"></div>
+    <div class="lm-sheet" id="landing-menu-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="lm-handle"></div>
+        <ul class="landing-menu-nav">
+            <li><button id="open-about-btn">ABOUT US</button></li>
+            <li><button id="open-contact-btn">CONTACT US</button></li>
+        </ul>
+        <div class="landing-menu-footer">
+            <button class="landing-menu-back-btn" id="landing-menu-back-btn">Back to Landing Page</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL 2: ABOUT US ───────────────────────────────────────── -->
+    <div class="lm-overlay" id="about-overlay"></div>
+    <div class="lm-sheet" id="about-sheet" role="dialog" aria-modal="true" aria-label="About Us">
+        <div class="lm-handle"></div>
+        <p class="lm-info-title">About Us</p>
+        <p class="lm-info-body">Silid Isko is a campus room management system built for ITECH students. More details coming soon.</p>
+        <button class="lm-info-close-btn" id="about-close-btn">Got it</button>
+    </div>
+
+    <!-- ── MODAL 3: CONTACT US ─────────────────────────────────────── -->
+    <div class="lm-overlay" id="contact-overlay"></div>
+    <div class="lm-sheet" id="contact-sheet" role="dialog" aria-modal="true" aria-label="Contact Us">
+        <div class="lm-handle"></div>
+        <p class="lm-info-title">Contact Us</p>
+        <p class="lm-info-body">For questions or concerns, reach out to the Silid Isko team. Contact details coming soon.</p>
+        <button class="lm-info-close-btn" id="contact-close-btn">Got it</button>
+    </div>
+
+    <!-- ── Signup Content ───────────────────────────────────────────── -->
+    <main class="signup-content">
+        <div class="signup-form-card">
+            <p class="signup-title">Sign up</p>
+
+            <!-- General error banner -->
+            <div class="signup-general-error" id="signup-general-error" role="alert">
+                Something went wrong. Please check the fields below and try again.
+            </div>
+
+            <!-- ── First Name / Last Name Row ─────────────────────────── -->
+            <div class="signup-field-row">
+                <div class="signup-field-group">
+                    <label class="signup-field-label" for="signup-firstname">First Name</label>
+                    <input class="signup-field-input" type="text" id="signup-firstname" name="firstname" autocomplete="given-name" placeholder="Juan" maxlength="64">
+                    <span class="signup-field-error" id="signup-firstname-error"></span>
+                </div>
+                <div class="signup-field-group">
+                    <label class="signup-field-label" for="signup-lastname">Last Name</label>
+                    <input class="signup-field-input" type="text" id="signup-lastname" name="lastname" autocomplete="family-name" placeholder="dela Cruz" maxlength="64">
+                    <span class="signup-field-error" id="signup-lastname-error"></span>
+                </div>
+            </div>
+
+            <!-- ── Year / Section Row ─────────────────────────────────── -->
+            <div class="signup-field-row">
+                <div class="signup-field-group">
+                    <label class="signup-field-label" for="signup-year">Year</label>
+                    <select class="signup-field-select placeholder-shown" id="signup-year" name="year">
+                        <option value="" disabled selected hidden></option>
+                        <option value="1st">1st Year</option>
+                        <option value="2nd">2nd Year</option>
+                        <option value="3rd">3rd Year</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span class="signup-field-error" id="signup-year-error"></span>
+                </div>
+                <div class="signup-field-group">
+                    <label class="signup-field-label" for="signup-section">Section</label>
+                    <select class="signup-field-select placeholder-shown" id="signup-section" name="section">
+                        <option value="" disabled selected hidden></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input class="signup-field-input" type="text" id="signup-section-input" name="section_custom" placeholder="Enter section" maxlength="32" style="display:none;">
+                    <span class="signup-field-error" id="signup-section-error"></span>
+                </div>
+            </div>
+
+            <!-- ── Course ─────────────────────────────────────────────── -->
+            <div class="signup-field-group">
+                <label class="signup-field-label" for="signup-course">Course</label>
+                <select class="signup-field-select placeholder-shown" id="signup-course" name="course">
+                    <option value="" disabled selected hidden></option>
+                    <option value="DCvET">Diploma in Civil Engineering Technology (DCvET)</option>
+                    <option value="DCET">Diploma in Computer Engineering Technology (DCET)</option>
+                    <option value="DEET">Diploma in Electrical Engineering Technology (DEET)</option>
+                    <option value="DECET">Diploma in Electronics Communications Engineering Technology (DECET)</option>
+                    <option value="DICT">Diploma in Information Communication Technology (DICT)</option>
+                    <option value="DMET">Diploma in Mechanical Engineering Technology (DMET)</option>
+                    <option value="DOMT">Diploma in Office Management Technology (DOMT)</option>
+                    <option value="DRET">Diploma in Railway Engineering Technology (DRET)</option>
+                </select>
+                <span class="signup-field-error" id="signup-course-error"></span>
+            </div>
+
+            <!-- ── Email Address ──────────────────────────────────────── -->
+            <div class="signup-field-group">
+                <label class="signup-field-label" for="signup-email">Email address</label>
+                <input class="signup-field-input" type="email" id="signup-email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" maxlength="254">
+                <span class="signup-field-error" id="signup-email-error"></span>
+            </div>
+
+            <!-- ── Password ───────────────────────────────────────────── -->
+            <div class="signup-field-group">
+                <label class="signup-field-label" for="signup-password">Password</label>
+                <div class="signup-password-wrapper">
+                    <input class="signup-field-input" type="password" id="signup-password" name="password" autocomplete="new-password" placeholder="Create a password" maxlength="128">
+                    <button class="signup-pw-toggle" id="signup-pw-toggle" type="button" aria-label="Show password">
+                        <iconify-icon icon="mingcute:eye-line" width="18" height="18" id="signup-pw-icon"></iconify-icon>
+                    </button>
+                </div>
+                <span class="signup-field-error" id="signup-password-error"></span>
+            </div>
+
+            <!-- ── Sign Up Button ─────────────────────────────────────── -->
+            <button class="signup-submit-btn" id="signup-submit-btn" type="button">Sign up</button>
+
+            <!-- ── Log In Link ────────────────────────────────────────── -->
+            <div class="signup-login-row">
+                Already have an account?<br>
+                <a href="login.html" class="signup-login-link" id="signup-login-link">Log in here.</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // MODAL HELPERS (same as login.html)
+        function openSheet(overlayId, sheetId) {
+            document.getElementById(overlayId).classList.add("open");
+            document.getElementById(sheetId).classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSheet(overlayId, sheetId) {
+            document.getElementById(overlayId).classList.remove("open");
+            document.getElementById(sheetId).classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        // Landing Menu Modal
+        (function initLandingMenuModal() {
+            var menuBtn = document.getElementById("landing-menu-btn");
+            var backBtn = document.getElementById("landing-menu-back-btn");
+            var aboutBtn = document.getElementById("open-about-btn");
+            var contactBtn = document.getElementById("open-contact-btn");
+
+            menuBtn.addEventListener("click", function() {
+                openSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            document.getElementById("landing-menu-overlay").addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            backBtn.addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function() { window.location.href = "index.html"; }, 180);
+            });
+
+            aboutBtn.addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function() { openSheet("about-overlay", "about-sheet"); }, 180);
+            });
+
+            contactBtn.addEventListener("click", function() {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function() { openSheet("contact-overlay", "contact-sheet"); }, 180);
+            });
+        })();
+
+        // About/Contact modals
+        document.getElementById("about-overlay").addEventListener("click", function() {
+            closeSheet("about-overlay", "about-sheet");
+        });
+        document.getElementById("about-close-btn").addEventListener("click", function() {
+            closeSheet("about-overlay", "about-sheet");
+        });
+        document.getElementById("contact-overlay").addEventListener("click", function() {
+            closeSheet("contact-overlay", "contact-sheet");
+        });
+        document.getElementById("contact-close-btn").addEventListener("click", function() {
+            closeSheet("contact-overlay", "contact-sheet");
+        });
+
+        // Password toggle
+        (function initPasswordToggle() {
+            var toggleBtn = document.getElementById("signup-pw-toggle");
+            var pwInput = document.getElementById("signup-password");
+            var pwIcon = document.getElementById("signup-pw-icon");
+            var isVisible = false;
+
+            toggleBtn.addEventListener("click", function() {
+                isVisible = !isVisible;
+                pwInput.type = isVisible ? "text" : "password";
+                pwIcon.setAttribute("icon", isVisible ? "mingcute:eye-close-line" : "mingcute:eye-line");
+                toggleBtn.setAttribute("aria-label", isVisible ? "Hide password" : "Show password");
+            });
+        })();
+
+        // Dropdown placeholder
+        (function initSelectPlaceholders() {
+            var selects = document.querySelectorAll(".signup-field-select");
+            selects.forEach(function(sel) {
+                sel.addEventListener("change", function() {
+                    if (sel.value !== "") { sel.classList.remove("placeholder-shown"); } 
+                    else { sel.classList.add("placeholder-shown"); }
+                });
+            });
+        })();
+
+        // Section toggle
+        (function initSectionToggle() {
+            var sectionSelect = document.getElementById("signup-section");
+            var sectionInput = document.getElementById("signup-section-input");
+
+            sectionSelect.addEventListener("change", function() {
+                if (sectionSelect.value === "other") {
+                    sectionSelect.style.display = "none";
+                    sectionInput.style.display = "block";
+                    sectionInput.value = "";
+                    sectionInput.focus();
+                }
+            });
+
+            sectionInput.addEventListener("input", function() {
+                if (sectionInput.value === "") {
+                    sectionSelect.style.display = "block";
+                    sectionSelect.classList.add("placeholder-shown");
+                    sectionSelect.value = "";
+                    sectionInput.style.display = "none";
+                }
+            });
+
+            sectionInput.addEventListener("blur", function() {
+                if (sectionInput.value.trim() === "") {
+                    sectionSelect.style.display = "block";
+                    sectionSelect.classList.add("placeholder-shown");
+                    sectionSelect.value = "";
+                    sectionInput.style.display = "none";
+                }
+            });
+        })();
+
+        // Field validation helpers
+        function setFieldError(inputEl, errorEl, message) {
+            inputEl.classList.add("error");
+            inputEl.classList.remove("valid");
+            errorEl.textContent = message;
+            errorEl.classList.add("visible");
+        }
+
+        function clearFieldError(inputEl, errorEl) {
+            inputEl.classList.remove("error");
+            errorEl.textContent = "";
+            errorEl.classList.remove("visible");
+        }
+
+        function clearGeneralError() {
+            document.getElementById("signup-general-error").classList.remove("visible");
+        }
+
+        function validateFirstName(value) {
+            var v = value.trim();
+            if (v === "") return { ok: false, msg: "First name is required." };
+            if (v.length < 2) return { ok: false, msg: "First name must be at least 2 characters." };
+            if (/[^a-zA-ZÀ-ÖØ-öø-ÿ '\-]/.test(v)) return { ok: false, msg: "Contains invalid characters." };
+            return { ok: true };
+        }
+
+        function validateLastName(value) {
+            var v = value.trim();
+            if (v === "") return { ok: false, msg: "Last name is required." };
+            if (v.length < 2) return { ok: false, msg: "Last name must be at least 2 characters." };
+            if (/[^a-zA-ZÀ-ÖØ-öø-ÿ '\-]/.test(v)) return { ok: false, msg: "Contains invalid characters." };
+            return { ok: true };
+        }
+
+        function validateYear(value) {
+            if (!value || value === "") return { ok: false, msg: "Please select your year level." };
+            return { ok: true };
+        }
+
+        function validateSection() {
+            var sectionSelect = document.getElementById("signup-section");
+            var sectionInput = document.getElementById("signup-section-input");
+            var isCustom = (sectionInput.style.display !== "none");
+
+            if (isCustom) {
+                var v = sectionInput.value.trim();
+                if (v === "") return { ok: false, msg: "Please enter your section.", input: sectionInput };
+                return { ok: true, input: sectionInput };
+            } else {
+                if (!sectionSelect.value || sectionSelect.value === "") {
+                    return { ok: false, msg: "Please select your section.", input: sectionSelect };
+                }
+                return { ok: true, input: sectionSelect };
+            }
+        }
+
+        function validateCourse(value) {
+            if (!value || value === "") return { ok: false, msg: "Please select your course." };
+            return { ok: true };
+        }
+
+        function validateEmail(value) {
+            var trimmed = value.trim();
+            if (trimmed === "") return { ok: false, msg: "Email address is required." };
+            if (trimmed.toLowerCase() === "dev") return { ok: true, bypass: true };
+            if (/\s/.test(trimmed)) return { ok: false, msg: "Email must not contain spaces." };
+            var emailPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(trimmed)) return { ok: false, msg: "Enter a valid email address." };
+            return { ok: true };
+        }
+
+        function validatePassword(value) {
+            if (value === "") return { ok: false, msg: "Password is required." };
+            if (value.toLowerCase() === "dev") return { ok: true, bypass: true };
+            if (value.length < 8) return { ok: false, msg: "Password must be at least 8 characters." };
+            if (!/[A-Z]/.test(value)) return { ok: false, msg: "Must contain at least one uppercase letter." };
+            if (!/[a-z]/.test(value)) return { ok: false, msg: "Must contain at least one lowercase letter." };
+            if (!/[0-9]/.test(value)) return { ok: false, msg: "Must contain at least one number." };
+            if (!/[^a-zA-Z0-9]/.test(value)) return { ok: false, msg: "Must contain at least one special character." };
+            return { ok: true };
+        }
+
+        // Live validation
+        (function initLiveValidation() {
+            var fields = [
+                { input: document.getElementById("signup-firstname"), error: document.getElementById("signup-firstname-error"), validate: function(el) { return validateFirstName(el.value); } },
+                { input: document.getElementById("signup-lastname"), error: document.getElementById("signup-lastname-error"), validate: function(el) { return validateLastName(el.value); } },
+                { input: document.getElementById("signup-email"), error: document.getElementById("signup-email-error"), validate: function(el) { return validateEmail(el.value); } },
+                { input: document.getElementById("signup-password"), error: document.getElementById("signup-password-error"), validate: function(el) { return validatePassword(el.value); } }
+            ];
+
+            fields.forEach(function(f) {
+                f.input.addEventListener("input", function() {
+                    clearGeneralError();
+                    if (f.input.classList.contains("error")) {
+                        var result = f.validate(f.input);
+                        if (result.ok) { clearFieldError(f.input, f.error); }
+                    }
+                });
+            });
+
+            var yearSelect = document.getElementById("signup-year");
+            var yearError = document.getElementById("signup-year-error");
+            yearSelect.addEventListener("change", function() {
+                clearGeneralError();
+                if (yearSelect.classList.contains("error")) {
+                    var r = validateYear(yearSelect.value);
+                    if (r.ok) { clearFieldError(yearSelect, yearError); }
+                }
+            });
+
+            var sectionSelect = document.getElementById("signup-section");
+            var sectionInput = document.getElementById("signup-section-input");
+            var sectionError = document.getElementById("signup-section-error");
+            sectionSelect.addEventListener("change", function() {
+                clearGeneralError();
+                if (sectionSelect.classList.contains("error")) {
+                    var r = validateSection();
+                    if (r.ok) { clearFieldError(r.input, sectionError); }
+                }
+            });
+            sectionInput.addEventListener("input", function() {
+                clearGeneralError();
+                if (sectionInput.classList.contains("error")) {
+                    var r = validateSection();
+                    if (r.ok) { clearFieldError(r.input, sectionError); }
+                }
+            });
+
+            var courseSelect = document.getElementById("signup-course");
+            var courseError = document.getElementById("signup-course-error");
+            courseSelect.addEventListener("change", function() {
+                clearGeneralError();
+                if (courseSelect.classList.contains("error")) {
+                    var r = validateCourse(courseSelect.value);
+                    if (r.ok) { clearFieldError(courseSelect, courseError); }
+                }
+            });
+        })();
+
+        // ============================================
+        // SUPABASE SIGNUP
+        // ============================================
+        (function initSignupSubmit() {
+            var submitBtn = document.getElementById("signup-submit-btn");
+            var firstnameInput = document.getElementById("signup-firstname");
+            var firstnameError = document.getElementById("signup-firstname-error");
+            var lastnameInput = document.getElementById("signup-lastname");
+            var lastnameError = document.getElementById("signup-lastname-error");
+            var yearSelect = document.getElementById("signup-year");
+            var yearError = document.getElementById("signup-year-error");
+            var sectionError = document.getElementById("signup-section-error");
+            var courseSelect = document.getElementById("signup-course");
+            var courseError = document.getElementById("signup-course-error");
+            var emailInput = document.getElementById("signup-email");
+            var emailError = document.getElementById("signup-email-error");
+            var passwordInput = document.getElementById("signup-password");
+            var passwordError = document.getElementById("signup-password-error");
+            var generalError = document.getElementById("signup-general-error");
+
+            submitBtn.addEventListener("click", function() {
+                submitBtn.classList.remove("bounce");
+                void submitBtn.offsetWidth;
+                submitBtn.classList.add("bounce");
+
+                var hasError = false;
+
+                var fnResult = validateFirstName(firstnameInput.value);
+                if (!fnResult.ok) { setFieldError(firstnameInput, firstnameError, fnResult.msg); hasError = true; } 
+                else { clearFieldError(firstnameInput, firstnameError); }
+
+                var lnResult = validateLastName(lastnameInput.value);
+                if (!lnResult.ok) { setFieldError(lastnameInput, lastnameError, lnResult.msg); hasError = true; } 
+                else { clearFieldError(lastnameInput, lastnameError); }
+
+                var yrResult = validateYear(yearSelect.value);
+                if (!yrResult.ok) { setFieldError(yearSelect, yearError, yrResult.msg); hasError = true; } 
+                else { clearFieldError(yearSelect, yearError); }
+
+                var secResult = validateSection();
+                if (!secResult.ok) { setFieldError(secResult.input, sectionError, secResult.msg); hasError = true; } 
+                else { clearFieldError(secResult.input, sectionError); }
+
+                var crResult = validateCourse(courseSelect.value);
+                if (!crResult.ok) { setFieldError(courseSelect, courseError, crResult.msg); hasError = true; } 
+                else { clearFieldError(courseSelect, courseError); }
+
+                var emResult = validateEmail(emailInput.value);
+                if (!emResult.ok) { setFieldError(emailInput, emailError, emResult.msg); hasError = true; } 
+                else { clearFieldError(emailInput, emailError); }
+
+                var pwResult = validatePassword(passwordInput.value);
+                if (!pwResult.ok) { setFieldError(passwordInput, passwordError, pwResult.msg); hasError = true; } 
+                else { clearFieldError(passwordInput, passwordError); }
+
+                if (hasError) {
+                    var firstErrorEl = document.querySelector(".signup-field-input.error, .signup-field-select.error");
+                    if (firstErrorEl) {
+                        firstErrorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                        firstErrorEl.focus();
+                    }
+                    return;
+                }
+
+                var isDevBypass = (emResult.bypass === true && pwResult.bypass === true);
+
+                if (isDevBypass) {
+                    runSignup();
+                    return;
+                }
+
+                // ── REAL SUPABASE SIGNUP ──
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Signing up…";
+
+                function getSectionValue() {
+                    var sectionInput = document.getElementById("signup-section-input");
+                    var sectionSelect = document.getElementById("signup-section");
+                    return (sectionInput.style.display !== "none") ? sectionInput.value.trim() : sectionSelect.value;
+                }
+
+                import('./js/supabase-client.js')
+                    .then(module => module.signUp(emailInput.value.trim(), passwordInput.value, {
+                        firstName: firstnameInput.value.trim(),
+                        lastName: lastnameInput.value.trim(),
+                        yearLevel: yearSelect.value,
+                        section: getSectionValue(),
+                        course: courseSelect.value
+                    }))
+                    .then(() => {
+                        window.location.href = "login.html";
+                    })
+                    .catch(error => {
+                        generalError.textContent = error.message || "Something went wrong. Please try again.";
+                        generalError.classList.add("visible");
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Sign up";
+                    });
+            });
+
+            submitBtn.addEventListener("animationend", function() {
+                submitBtn.classList.remove("bounce");
+            });
+
+            function runSignup() {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Signing up…";
+                setTimeout(function() {
+                    window.location.href = "login.html";
+                }, 900);
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Reserve // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+    </symbol>
+    </svg>
+</head>
+<body>
+
+    <!-- ───── HEADER ───── -->
+    <header class="site-header">
+        <div class="header-top">
+            <div class="brand">
+                <div class="brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </div>
+                <span class="brand-name">Silid Isko</span>
+            </div>
+            <button class="menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <a href="home.html" class="back-link">&#8249; Back to homepage</a>
+
+        <div class="page-title">
+            <div class="page-title-icon">
+                <iconify-icon icon="fluent:note-add-16-filled" width="22" height="22"></iconify-icon>
+            </div>
+            <div>
+                <h1>Room<br>Reservation</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- ══ MODAL 1: HEADER MENU MODAL ════════════════════════════════════ -->
+    <div class="gm-overlay" id="menu-modal-overlay"></div>
+    <div class="gm-sheet menu-modal-sheet" id="menu-modal-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="gm-handle"></div>
+        <ul class="menu-modal-nav">
+            <li><a href="users.html">USER PROFILE</a></li>
+            <li><a href="myreserve.html">RESERVATIONS</a></li>
+        </ul>
+        <div class="menu-modal-footer">
+            <button class="menu-modal-logout-btn" id="menu-modal-logout-btn">Log out</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL 2: CONFIRM LOGOUT MODAL ────────────── -->
+    <div class="gm-overlay" id="logout-modal-overlay"></div>
+    <div class="gm-sheet logout-modal-sheet" id="logout-modal-sheet" role="dialog" aria-modal="true" aria-label="Confirm logout">
+        <div class="gm-handle"></div>
+        <div class="logout-modal-hero">
+            <div class="logout-modal-hero-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#solar--exit-bold" /></svg>
+            </div>
+            <div class="logout-modal-hero-title">Logging out?</div>
+        </div>
+        <p class="logout-modal-subtext">Are you sure you want to end your session and return to the main landing page?</p>
+        <div class="logout-modal-actions">
+            <button class="logout-modal-cancel-btn" id="logout-modal-cancel-btn">Cancel</button>
+            <a href="index.html" class="logout-modal-confirm-btn">Log out</a>
+        </div>
+    </div>
+
+    <!-- ───── MAIN SCROLL AREA ───── -->
+    <main class="reserve-scroll">
+        <div class="form-card">
+
+            <!-- CHOOSE ROOM -->
+            <div class="field-group">
+                <label class="field-label" for="field-room">Choose room</label>
+                <div class="select-wrapper" id="room-wrap">
+                    <select class="field-select" id="field-room">
+                        <option value="" disabled selected></option>
+                        <optgroup label="1st Floor">
+                            <!-- Room status: all available for now.
+                                 TODO: Dynamically grey out options where status === 'reserved' or 'occupied'
+                                 by adding the 'disabled' attribute when pulling live data from avail.html's
+                                 room status store / shared state. -->
+                            <option value="103A">Room 103A — Computer Lab</option>
+                            <option value="103B">Room 103B — Computer Lab</option>
+                            <option value="105">Room 105 — Speech Lab</option>
+                        </optgroup>
+                        <optgroup label="2nd Floor">
+                            <option value="201">Room 201 — Lecture Room</option>
+                            <option value="202">Room 202 — Computer Lab</option>
+                            <option value="203">Room 203 — Computer Lab</option>
+                            <option value="206">Room 206 — Lecture Room</option>
+                            <option value="208">Room 208 — Lab Room</option>
+                            <option value="209">Room 209 — Lecture Room</option>
+                            <option value="210">Room 210 — Lecture Room</option>
+                            <option value="211">Room 211 — Lecture Room</option>
+                            <option value="212">Room 212 — Lecture Room</option>
+                            <option value="213">Room 213 — Drawing Room</option>
+                        </optgroup>
+                        <optgroup label="3rd Floor">
+                            <option value="301">Room 301 — Lecture Room</option>
+                            <option value="302">Room 302 — Computer Lab</option>
+                            <option value="303">Room 303 — Computer Lab</option>
+                            <option value="304">Room 304 — Lecture Room</option>
+                            <option value="305">Room 305 — Lab Room</option>
+                            <option value="307">Room 307 — Lecture Room</option>
+                            <option value="308">Room 308 — Lecture Room</option>
+                            <option value="AVR">AVR — Audio Visual Room</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <span class="field-error" id="err-room">Please select a room.</span>
+            </div>
+
+            <div class="field-divider"></div>
+
+            <!-- PROFESSOR NAME -->
+            <div class="field-group">
+                <label class="field-label">Professor / Instructor Name</label>
+                <div class="field-row">
+                    <div class="field-group">
+                        <input class="field-input" id="field-fname" type="text" placeholder="First name" autocomplete="off">
+                        <span class="field-error" id="err-fname">Enter a valid first name.</span>
+                    </div>
+                    <div class="field-group">
+                        <input class="field-input" id="field-lname" type="text" placeholder="Last name" autocomplete="off">
+                        <span class="field-error" id="err-lname">Enter a valid last name.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-divider"></div>
+
+            <!-- COURSE -->
+            <div class="field-group">
+                <label class="field-label" for="field-course">Course</label>
+                <div class="select-wrapper" id="course-wrap">
+                    <select class="field-select" id="field-course">
+                        <option value="" disabled selected></option>
+                        <option value="DCvET">Diploma in Civil Engineering Technology (DCvET)</option>
+                        <option value="DCET">Diploma in Computer Engineering Technology (DCET)</option>
+                        <option value="DEET">Diploma in Electrical Engineering Technology (DEET)</option>
+                        <option value="DECET">Diploma in Electronics Communications Engineering Technology (DECET)</option>
+                        <option value="DICT">Diploma in Information Communication Technology (DICT)</option>
+                        <option value="DMET">Diploma in Mechanical Engineering Technology (DMET)</option>
+                        <option value="DOMT">Diploma in Office Management Technology (DOMT)</option>
+                        <option value="DRET">Diploma in Railway Engineering Technology (DRET)</option>
+                    </select>
+                </div>
+                <span class="field-error" id="err-course">Please select a course.</span>
+            </div>
+
+            <div class="field-divider"></div>
+
+            <!-- YEAR + SECTION -->
+            <div class="field-row">
+                <div class="field-group">
+                    <label class="field-label" for="field-year">Year</label>
+                    <div class="select-wrapper" id="year-wrap">
+                        <select class="field-select" id="field-year">
+                            <option value="" disabled selected></option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                        </select>
+                    </div>
+                    <span class="field-error" id="err-year">Select a year.</span>
+                </div>
+                <div class="field-group" id="section-group">
+                    <label class="field-label" for="field-section">Section</label>
+                    <div class="select-wrapper" id="section-wrap">
+                        <select class="field-select" id="field-section">
+                            <option value="" disabled selected></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <input class="field-input" id="field-section-other" type="text"
+                           placeholder="e.g. 6" maxlength="2"
+                           style="display:none;" autocomplete="off">
+                    <span class="field-error" id="err-section">Select or enter a section.</span>
+                </div>
+            </div>
+
+            <div class="field-divider"></div>
+
+            <!-- DATE -->
+            <div class="field-group">
+                <label class="field-label" for="field-date-display">Date</label>
+                <div class="date-wrapper">
+                    <input class="field-input" id="field-date-display" type="text"
+                           placeholder="MM/DD/YYYY" maxlength="10" autocomplete="off" inputmode="numeric">
+                    <button class="date-icon-btn" type="button" id="calendar-btn" aria-label="Open calendar">
+                        <iconify-icon icon="mdi:calendar" width="18" height="18"></iconify-icon>
+                    </button>
+                    <input type="date" id="field-date-native" class="date-native" tabindex="-1">
+                </div>
+                <span class="field-error" id="err-date">Enter a valid date (MM/DD/YYYY).</span>
+            </div>
+
+            <div class="field-divider"></div>
+
+            <!-- START TIME + END TIME -->
+            <div class="field-row">
+                <div class="field-group">
+                    <label class="field-label" for="field-start">Start time</label>
+                    <div class="select-wrapper" id="start-wrap">
+                        <select class="field-select" id="field-start">
+                            <option value="" disabled selected></option>
+                        </select>
+                    </div>
+                    <span class="field-error" id="err-start">Select a start time.</span>
+                </div>
+                <div class="field-group">
+                    <label class="field-label" for="field-end">End time</label>
+                    <div class="select-wrapper" id="end-wrap">
+                        <select class="field-select" id="field-end">
+                            <option value="" disabled selected></option>
+                        </select>
+                    </div>
+                    <span class="field-error" id="err-end">Select a valid end time.</span>
+                </div>
+            </div>
+
+            <div class="field-divider"></div>
+
+            <!-- PURPOSE -->
+            <div class="field-group">
+                <label class="field-label" for="field-purpose">Purpose</label>
+                <div class="select-wrapper" id="purpose-wrap">
+                    <select class="field-select" id="field-purpose">
+                        <option value="" disabled selected></option>
+                        <option value="Lecture">Lecture</option>
+                        <option value="Laboratory Activity">Laboratory Activity</option>
+                        <option value="Group Study">Group Study</option>
+                        <option value="Project Meeting">Project Meeting</option>
+                        <option value="Organization Meeting">Organization Meeting</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <input class="field-input" id="field-purpose-other" type="text"
+                       placeholder="Describe your purpose" style="display:none;" autocomplete="off">
+                <span class="field-error" id="err-purpose">Please describe the purpose.</span>
+            </div>
+
+        </div><!-- /form-card -->
+
+        <!-- RESERVE BUTTON -->
+        <button class="reserve-btn" id="reserve-btn" type="button">Reserve room now</button>
+
+    </main>
+
+    <!-- ───── CONFIRMATION MODAL ───── -->
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+        <div class="modal-sheet">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">&#215;</button>
+            <div class="modal-handle"></div>
+            <p class="modal-title" id="modal-title-text">Confirm Reservation</p>
+
+            <div class="modal-row">
+                <span class="modal-label">Room</span>
+                <span class="modal-value" id="m-room">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Prof/Inst. Name</span>
+                <span class="modal-value" id="m-name">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Course</span>
+                <span class="modal-value" id="m-course">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Year</span>
+                <span class="modal-value" id="m-year">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Section</span>
+                <span class="modal-value" id="m-section">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Date</span>
+                <span class="modal-value" id="m-date">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Start Time</span>
+                <span class="modal-value" id="m-start">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">End Time</span>
+                <span class="modal-value" id="m-end">—</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">Purpose</span>
+                <span class="modal-value" id="m-purpose">—</span>
+            </div>
+
+            <button class="modal-confirm-btn" id="modal-confirm-btn" type="button">Place reservation</button>
+        </div>
+    </div>
+
+    <!-- ───── BOTTOM NAVBAR ───── -->
+    <nav class="bottom-nav">
+        <a href="scheds.html" class="nav-item" aria-label="Schedules">
+            <iconify-icon icon="typcn:calendar" width="24" height="24"></iconify-icon>
+        </a>
+        <a href="#" class="nav-item active" aria-label="Reservation">
+            <iconify-icon icon="fluent:note-add-16-filled" width="24" height="24"></iconify-icon>
+        </a>
+        <a href="checkin.html" class="nav-item" aria-label="QR Check-in">
+            <iconify-icon icon="ion:qr-code" width="24" height="24"></iconify-icon>
+        </a>
+        <a href="logs.html" class="nav-item" aria-label="History & Logs">
+            <iconify-icon icon="mingcute:history-fill" width="24" height="24"></iconify-icon>
+        </a>
+        <a href="avail.html" class="nav-item" aria-label="Room Availability">
+            <iconify-icon icon="material-symbols:map" width="24" height="24"></iconify-icon>
+        </a>
+    </nav>
+
+    <script>
+    'use strict';
+
+    /* ═══════════════════════════════════════════════════════════════════
+       TIME SLOT GENERATION
+       Campus hours: 7:00 AM – 9:00 PM in 30-minute intervals
+    ═══════════════════════════════════════════════════════════════════ */
+    function buildTimeSlots() {
+        const slots = [];
+        for (let h = 7; h <= 21; h++) {
+            const period = h < 12 ? 'AM' : 'PM';
+            const display12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+            slots.push({ label: `${display12}:00 ${period}`, minutes: h * 60 });
+            if (h < 21) {
+                slots.push({ label: `${display12}:30 ${period}`, minutes: h * 60 + 30 });
+            }
+        }
+        return slots;
+    }
+
+    const TIME_SLOTS = buildTimeSlots();
+    const startSel = document.getElementById('field-start');
+    const endSel   = document.getElementById('field-end');
+
+    function populateStartTimes() {
+        startSel.innerHTML = '<option value="" disabled selected></option>';
+        TIME_SLOTS.forEach(slot => {
+            const opt = document.createElement('option');
+            opt.value = slot.minutes;
+            opt.textContent = slot.label;
+            startSel.appendChild(opt);
+        });
+    }
+
+    function populateEndTimes(afterMinutes) {
+        const prevVal = endSel.value;
+        endSel.innerHTML = '<option value="" disabled selected></option>';
+        TIME_SLOTS.forEach(slot => {
+            const opt = document.createElement('option');
+            opt.value = slot.minutes;
+            opt.textContent = slot.label;
+            if (slot.minutes <= afterMinutes) {
+                opt.disabled = true;
+                opt.style.color = '#bbb';
+            }
+            endSel.appendChild(opt);
+        });
+        // Restore selection if still valid
+        if (prevVal && parseInt(prevVal) > afterMinutes) endSel.value = prevVal;
+    }
+
+    populateStartTimes();
+    populateEndTimes(-1); // all enabled initially
+
+    startSel.addEventListener('change', () => {
+        const mins = parseInt(startSel.value);
+        populateEndTimes(isNaN(mins) ? -1 : mins);
+        clearError('err-end');
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       SECTION — "Other" conditional
+    ═══════════════════════════════════════════════════════════════════ */
+    const sectionSel   = document.getElementById('field-section');
+    const sectionOther = document.getElementById('field-section-other');
+    const sectionWrap  = document.getElementById('section-wrap');
+
+    sectionSel.addEventListener('change', () => {
+        if (sectionSel.value === 'Other') {
+            sectionWrap.style.display = 'none';
+            sectionOther.style.display = 'block';
+            sectionOther.focus();
+        }
+        clearError('err-section');
+    });
+
+    // Only allow up to 2 numeric digits in "other" section field
+    sectionOther.addEventListener('input', () => {
+        sectionOther.value = sectionOther.value.replace(/\D/g, '').slice(0, 2);
+        clearError('err-section');
+    });
+
+    // Allow switching back by showing the select again if the input is cleared
+    sectionOther.addEventListener('blur', () => {
+        if (sectionOther.value === '') {
+            sectionWrap.style.display = 'block';
+            sectionOther.style.display = 'none';
+            sectionSel.value = '';
+        }
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       PURPOSE — "Other" conditional
+    ═══════════════════════════════════════════════════════════════════ */
+    const purposeSel   = document.getElementById('field-purpose');
+    const purposeOther = document.getElementById('field-purpose-other');
+    const purposeWrap  = document.getElementById('purpose-wrap');
+
+    purposeSel.addEventListener('change', () => {
+        if (purposeSel.value === 'Other') {
+            purposeWrap.style.display = 'none';
+            purposeOther.style.display = 'block';
+            purposeOther.focus();
+        } else {
+            purposeWrap.style.display = 'block';
+            purposeOther.style.display = 'none';
+        }
+        clearError('err-purpose');
+    });
+
+    // Accept only letters, spaces, basic punctuation
+    purposeOther.addEventListener('input', () => {
+        purposeOther.value = purposeOther.value.replace(/[^a-zA-Z\s.,\-'!?]/g, '');
+        clearError('err-purpose');
+    });
+
+    // Revert to dropdown if the input is left empty (mirrors section field behaviour)
+    purposeOther.addEventListener('blur', () => {
+        if (purposeOther.value.trim() === '') {
+            purposeWrap.style.display = 'block';
+            purposeOther.style.display = 'none';
+            purposeSel.value = '';
+        }
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       NAME FIELD VALIDATION — accept only alpha, spaces, hyphens, periods
+    ═══════════════════════════════════════════════════════════════════ */
+    ['field-fname', 'field-lname'].forEach(id => {
+        document.getElementById(id).addEventListener('input', function () {
+            this.value = this.value.replace(/[^a-zA-Z\s\-\.]/g, '');
+            clearError(id === 'field-fname' ? 'err-fname' : 'err-lname');
+        });
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       DATE — masked input (MM/DD/YYYY) + native calendar icon
+    ═══════════════════════════════════════════════════════════════════ */
+    const dateDisplay = document.getElementById('field-date-display');
+    const dateNative  = document.getElementById('field-date-native');
+    const calBtn      = document.getElementById('calendar-btn');
+
+    dateDisplay.addEventListener('input', handleDateInput);
+    dateDisplay.addEventListener('keydown', handleDateKeydown);
+
+    let prevDateVal = '';
+
+    function handleDateInput(e) {
+        let raw = dateDisplay.value.replace(/\D/g, ''); // digits only
+        let formatted = '';
+
+        if (raw.length > 8) raw = raw.slice(0, 8);
+
+        if (raw.length >= 1) formatted = raw.slice(0, 2);
+        if (raw.length >= 3) formatted += '/' + raw.slice(2, 4);
+        if (raw.length >= 5) formatted += '/' + raw.slice(4, 8);
+
+        dateDisplay.value = formatted;
+        prevDateVal = formatted;
+        clearError('err-date');
+    }
+
+    function handleDateKeydown(e) {
+        // Allow normal control keys
+        if (['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+        // Block non-numeric
+        if (!/^\d$/.test(e.key)) e.preventDefault();
+    }
+
+    // Calendar icon opens the native date picker
+    calBtn.addEventListener('click', () => {
+        dateNative.showPicker ? dateNative.showPicker() : dateNative.click();
+    });
+
+    dateNative.addEventListener('change', () => {
+        if (!dateNative.value) return;
+        const [year, month, day] = dateNative.value.split('-');
+        dateDisplay.value = `${month}/${day}/${year}`;
+        clearError('err-date');
+    });
+
+    function isValidDate(str) {
+        if (!/^\d{2}\/\d{2}\/\d{4}$/.test(str)) return false;
+        const [m, d, y] = str.split('/').map(Number);
+        const dt = new Date(y, m - 1, d);
+        return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       CLEAR LISTENERS for dropdowns/inputs
+    ═══════════════════════════════════════════════════════════════════ */
+    ['field-room', 'field-course', 'field-year', 'field-start', 'field-end'].forEach(id => {
+        document.getElementById(id).addEventListener('change', () => {
+            const errMap = {
+                'field-room': 'err-room', 'field-course': 'err-course',
+                'field-year': 'err-year', 'field-start': 'err-start', 'field-end': 'err-end'
+            };
+            clearError(errMap[id]);
+        });
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       ERROR HELPERS
+    ═══════════════════════════════════════════════════════════════════ */
+    function showError(fieldEl, errId) {
+        if (fieldEl) fieldEl.classList.add('error');
+        const errEl = document.getElementById(errId);
+        if (errEl) errEl.classList.add('visible');
+    }
+
+    function clearError(errId) {
+        const errEl = document.getElementById(errId);
+        if (!errEl) return;
+        errEl.classList.remove('visible');
+        // Also remove error class from the related field
+        const idMap = {
+            'err-room': 'room-wrap', 'err-course': 'course-wrap',
+            'err-year': 'year-wrap', 'err-start': 'start-wrap',
+            'err-end': 'end-wrap', 'err-section': 'section-wrap',
+            'err-purpose': 'purpose-wrap',
+            'err-fname': 'field-fname', 'err-lname': 'field-lname',
+            'err-date': 'field-date-display'
+        };
+        const el = document.getElementById(idMap[errId]);
+        if (el) el.classList.remove('error');
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       FORM VALIDATION
+    ═══════════════════════════════════════════════════════════════════ */
+    function validateAll() {
+        let firstError = null;
+        let valid = true;
+
+        function fail(fieldId, errId) {
+            const el = document.getElementById(fieldId);
+            showError(el, errId);
+            if (!firstError) firstError = el;
+            valid = false;
+        }
+
+        // Room
+        if (!document.getElementById('field-room').value) fail('room-wrap', 'err-room');
+
+        // Names
+        const fname = document.getElementById('field-fname').value.trim();
+        const lname = document.getElementById('field-lname').value.trim();
+        const nameRegex = /^[a-zA-Z\s\-\.]+$/;
+        if (!fname || !nameRegex.test(fname)) fail('field-fname', 'err-fname');
+        if (!lname || !nameRegex.test(lname)) fail('field-lname', 'err-lname');
+
+        // Course
+        if (!document.getElementById('field-course').value) fail('course-wrap', 'err-course');
+
+        // Year
+        if (!document.getElementById('field-year').value) fail('year-wrap', 'err-year');
+
+        // Section
+        const isOtherSection = sectionWrap.style.display === 'none';
+        if (isOtherSection) {
+            if (!sectionOther.value.trim() || !/^\d{1,2}$/.test(sectionOther.value.trim())) {
+                showError(sectionOther, 'err-section');
+                if (!firstError) firstError = sectionOther;
+                valid = false;
+            }
+        } else {
+            if (!sectionSel.value) fail('section-wrap', 'err-section');
+        }
+
+        // Date
+        if (!isValidDate(dateDisplay.value)) {
+            showError(dateDisplay, 'err-date');
+            if (!firstError) firstError = dateDisplay;
+            valid = false;
+        }
+
+        // Start time
+        if (!startSel.value) fail('start-wrap', 'err-start');
+
+        // End time — must be selected and after start
+        const startMins = parseInt(startSel.value);
+        const endMins   = parseInt(endSel.value);
+        if (!endSel.value || (!isNaN(startMins) && endMins <= startMins)) {
+            fail('end-wrap', 'err-end');
+        }
+
+        // Purpose
+        const isOtherPurpose = purposeWrap.style.display === 'none';
+        if (isOtherPurpose) {
+            const purpVal = purposeOther.value.trim();
+            if (!purpVal || /\d/.test(purpVal)) {
+                showError(purposeOther, 'err-purpose');
+                if (!firstError) firstError = purposeOther;
+                valid = false;
+            }
+        } else {
+            if (!purposeSel.value) fail('purpose-wrap', 'err-purpose');
+        }
+
+        if (!valid && firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        return valid;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       COLLECT FORM VALUES FOR MODAL
+    ═══════════════════════════════════════════════════════════════════ */
+    function getFormValues() {
+        const roomOpt  = document.getElementById('field-room');
+        const roomText = roomOpt.options[roomOpt.selectedIndex]?.text || '';
+
+        const courseOpt  = document.getElementById('field-course');
+        const courseText = courseOpt.options[courseOpt.selectedIndex]?.text || '';
+
+        const isOtherSection = sectionWrap.style.display === 'none';
+        const sectionVal = isOtherSection ? sectionOther.value.trim() : sectionSel.value;
+
+        const startOpt  = startSel.options[startSel.selectedIndex]?.text || '';
+        const endOpt    = endSel.options[endSel.selectedIndex]?.text || '';
+
+        const isOtherPurpose = purposeWrap.style.display === 'none';
+        const purposeVal = isOtherPurpose ? purposeOther.value.trim() : purposeSel.value;
+
+        return {
+            room:    roomText.split('—')[0].trim(),
+            name:    `${document.getElementById('field-fname').value.trim()} ${document.getElementById('field-lname').value.trim()}`,
+            course:  courseText,
+            year:    document.getElementById('field-year').value,
+            section: sectionVal,
+            date:    dateDisplay.value,
+            start:   startOpt,
+            end:     endOpt,
+            purpose: purposeVal,
+        };
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════════════════════════════ */
+    const overlay    = document.getElementById('modal-overlay');
+    const modalClose = document.getElementById('modal-close');
+
+    function openModal(vals) {
+        document.getElementById('m-room').textContent    = vals.room;
+        document.getElementById('m-name').textContent    = vals.name;
+        document.getElementById('m-course').textContent  = vals.course;
+        document.getElementById('m-year').textContent    = vals.year;
+        document.getElementById('m-section').textContent = vals.section;
+        document.getElementById('m-date').textContent    = vals.date;
+        document.getElementById('m-start').textContent   = vals.start;
+        document.getElementById('m-end').textContent     = vals.end;
+        document.getElementById('m-purpose').textContent = vals.purpose;
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    // Close on backdrop click (but not on sheet click)
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       RESERVE BUTTON
+    ═══════════════════════════════════════════════════════════════════ */
+    document.getElementById('reserve-btn').addEventListener('click', () => {
+        if (validateAll()) {
+            openModal(getFormValues());
+        }
+    });
+
+    /* ═══════════════════════════════════════════════════════════════════
+       CONFIRM RESERVATION
+    ═══════════════════════════════════════════════════════════════════ */
+    document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+        const vals = getFormValues();
+
+        // ── Simulated reservation submission ─────────────────────────
+        // TODO: Replace this block with a real API call / database write.
+        //       On success, the response should provide the confirmed roomId.
+
+        const submissionSucceeded = true; // Placeholder — always succeeds for now
+
+        if (submissionSucceeded) {
+            closeModal();
+
+            // TODO: Call setRoomStatus(roomId, 'reserved') on avail.html once pages
+            //       share state (e.g. via localStorage, a shared module, or a backend).
+            //       The roomId is the raw value from the #field-room select.
+            //
+            // Example (once linked):
+            //   if (window.setRoomStatus) setRoomStatus(roomId, 'reserved');
+
+            alert(`✅ Reservation confirmed!\n\nRoom ${vals.room} has been reserved for ${vals.name} on ${vals.date} from ${vals.start} to ${vals.end}.`);
+        } else {
+            // TODO: Handle specific error codes from the backend
+            alert('❌ Reservation failed. Please try again.');
+        }
+    });
+
+    /* ══════════════════════════════════════════════════════
+   MENU MODAL + LOGOUT MODAL LOGIC
+   Copy this script block to other pages as needed.
+   ══════════════════════════════════════════════════════ */
+
+/* ── Menu modal ──────────────────────────────────────── */
+(function initMenuModal() {
+    const menuBtn        = document.querySelector(".menu-btn");
+    const menuOverlay    = document.getElementById("menu-modal-overlay");
+    const menuSheet      = document.getElementById("menu-modal-sheet");
+    const logoutTrigger  = document.getElementById("menu-modal-logout-btn");
+
+    function openMenuModal() {
+        menuOverlay.classList.add("open");
+        menuSheet.classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+    function closeMenuModal() {
+        menuOverlay.classList.remove("open");
+        menuSheet.classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    menuBtn.addEventListener("click", openMenuModal);
+    menuOverlay.addEventListener("click", closeMenuModal);
+
+    /* "Log out" inside menu triggers the confirm-logout modal */
+    logoutTrigger.addEventListener("click", function () {
+        closeMenuModal();
+        /* Small delay so menu sheet finishes sliding down before logout sheet slides up */
+        setTimeout(openLogoutModal, 180);
+    });
+})();
+
+/* ── Logout confirm modal ────────────────────────────── */
+function openLogoutModal() {
+    const logoutOverlay = document.getElementById("logout-modal-overlay");
+    const logoutSheet   = document.getElementById("logout-modal-sheet");
+    logoutOverlay.classList.add("open");
+    logoutSheet.classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+(function initLogoutModal() {
+    const logoutOverlay = document.getElementById("logout-modal-overlay");
+    const logoutSheet   = document.getElementById("logout-modal-sheet");
+    const cancelBtn     = document.getElementById("logout-modal-cancel-btn");
+
+    function closeLogoutModal() {
+        logoutOverlay.classList.remove("open");
+        logoutSheet.classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    cancelBtn.addEventListener("click", closeLogoutModal);
+    logoutOverlay.addEventListener("click", closeLogoutModal);
+})();
+    </script>
+
+<!-- ============================================
+     SUPABASE RESERVATION HANDLER
+     Add this at the end of reserve.html
+     ============================================ -->
+<script type="module">
+import { createReservation, getRoomByName, checkRoomAvailability } from './js/supabase-client.js';
+
+// Override the confirm reservation button
+document.getElementById('modal-confirm-btn').addEventListener('click', async function() {
+    const vals = getFormValues();
+    
+    try {
+        // Get current user
+        const { data: { user } } = await window.supabase.auth.getUser();
+        if (!user) throw new Error('Please login first');
+        
+        // Get room ID
+        const room = await getRoomByName(vals.room);
+        if (!room) throw new Error('Room not found');
+        
+        // Check availability
+        const isAvailable = await checkRoomAvailability(room.id, vals.date, vals.start, vals.end);
+        if (!isAvailable) throw new Error('Room is not available at this time');
+        
+        // Create reservation
+        const result = await createReservation({
+            user_id: user.id,
+            room_id: room.id,
+            reservation_date: vals.date,
+            start_time: vals.start,
+            end_time: vals.end,
+            professor_name: vals.name,
+            course: vals.course,
+            year_level: vals.year,
+            section: vals.section,
+            purpose: vals.purpose,
+            status: 'pending'
+        });
+        
+        closeModal();
+        alert(`✅ Reservation confirmed!\n\nRoom ${vals.room} has been reserved for ${vals.name} on ${vals.date} from ${vals.start} to ${vals.end}.`);
+        
+        // Update room status on avail.html
+        localStorage.setItem('roomStatus', JSON.stringify({
+            room: vals.room,
+            status: 'reserved'
+        }));
+        
+    } catch (error) {
+        alert('❌ Reservation failed: ' + error.message);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <!-- Inline SVG brand icon — reliable fallback, no CDN dependency -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <!-- Brand icon: a simple door/room outline -->
+        <symbol id="brand--room" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3 21V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16h-2V5H5v16H3zm4 0v-6h10v6H7zm2-2h6v-2H9v2zm3-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+        </symbol>
+        <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+        </symbol>
+    </svg>
+</head>
+<body>
+
+    <!-- ── Site Header ─────────────────────────────────────────────── -->
+    <header class="landing-site-header">
+        <div class="landing-header-top">
+            <div class="landing-brand">
+                <span class="landing-brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </span>
+                <span class="landing-brand-name">Silid Isko</span>
+            </div>
+            <button class="landing-menu-btn" aria-label="Menu" id="landing-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ── MODAL 1: LANDING HEADER MENU MODAL ────────────────────────
+         Copy this block to login.html / signup.html as needed.
+         ────────────────────────────────────────────────────────────── -->
+    <div class="lm-overlay" id="landing-menu-overlay"></div>
+    <div class="lm-sheet" id="landing-menu-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="lm-handle"></div>
+        <ul class="landing-menu-nav">
+            <li><button id="open-about-btn">ABOUT US</button></li>
+            <li><button id="open-contact-btn">CONTACT US</button></li>
+        </ul>
+        <div class="landing-menu-footer">
+            <button class="landing-menu-back-btn" id="landing-menu-back-btn">Back to Landing Page</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL 2: ABOUT US ───────────────────────────────────────── -->
+    <div class="lm-overlay" id="about-overlay"></div>
+    <div class="lm-sheet" id="about-sheet" role="dialog" aria-modal="true" aria-label="About Us">
+        <div class="lm-handle"></div>
+        <p class="lm-info-title">About Us</p>
+        <p class="lm-info-body">Silid Isko is a campus room management system built for ITECH students. More details coming soon.</p>
+        <button class="lm-info-close-btn" id="about-close-btn">Got it</button>
+    </div>
+
+    <!-- ── MODAL 3: CONTACT US ─────────────────────────────────────── -->
+    <div class="lm-overlay" id="contact-overlay"></div>
+    <div class="lm-sheet" id="contact-sheet" role="dialog" aria-modal="true" aria-label="Contact Us">
+        <div class="lm-handle"></div>
+        <p class="lm-info-title">Contact Us</p>
+        <p class="lm-info-body">For questions or concerns, reach out to the Silid Isko team. Contact details coming soon.</p>
+        <button class="lm-info-close-btn" id="contact-close-btn">Got it</button>
+    </div>
+
+    <!-- ── Hero Body ───────────────────────────────────────────────── -->
+    <div class="landing-body">
+        <div class="landing-hero">
+            <h1 class="landing-headline">Your campus workspace, simplified</h1>
+            <p class="landing-subheadline">A simple and reliable room reservation system&nbsp; for ITECH students.</p>
+        </div>
+
+        <div class="landing-cta-row">
+            <a href="login.html" class="landing-btn-login" id="landing-btn-login">
+                Log in
+                <span class="btn-chevron">
+                    <iconify-icon icon="mingcute:right-line" width="16" height="16"></iconify-icon>
+                </span>
+            </a>
+            <a href="signup.html" class="landing-btn-signup" id="landing-btn-signup">Sign up</a>
+        </div>
+    </div>
+
+    <script>
+        /* ══════════════════════════════════════════════════════════
+           MODAL HELPER — open / close a sheet + its overlay
+           ══════════════════════════════════════════════════════════ */
+        function openSheet(overlayId, sheetId) {
+            document.getElementById(overlayId).classList.add("open");
+            document.getElementById(sheetId).classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeSheet(overlayId, sheetId) {
+            document.getElementById(overlayId).classList.remove("open");
+            document.getElementById(sheetId).classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        /* ── MODAL 1: Landing Menu Modal ─────────────────────────── */
+        /* Copy this block to login.html / signup.html as needed.    */
+        (function initLandingMenuModal() {
+            const menuBtn  = document.getElementById("landing-menu-btn");
+            const backBtn  = document.getElementById("landing-menu-back-btn");
+            const aboutBtn = document.getElementById("open-about-btn");
+            const contactBtn = document.getElementById("open-contact-btn");
+
+            menuBtn.addEventListener("click", function () {
+                openSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            document.getElementById("landing-menu-overlay").addEventListener("click", function () {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            /* "Back to Landing Page" — closes sheet (already on landing page) */
+            backBtn.addEventListener("click", function () {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+            });
+
+            /* About Us — closes menu then opens About sheet */
+            aboutBtn.addEventListener("click", function () {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function () {
+                    openSheet("about-overlay", "about-sheet");
+                }, 180);
+            });
+
+            /* Contact Us — closes menu then opens Contact sheet */
+            contactBtn.addEventListener("click", function () {
+                closeSheet("landing-menu-overlay", "landing-menu-sheet");
+                setTimeout(function () {
+                    openSheet("contact-overlay", "contact-sheet");
+                }, 180);
+            });
+        })();
+
+        /* ── MODAL 2: About Us ───────────────────────────────────── */
+        document.getElementById("about-overlay").addEventListener("click", function () {
+            closeSheet("about-overlay", "about-sheet");
+        });
+        document.getElementById("about-close-btn").addEventListener("click", function () {
+            closeSheet("about-overlay", "about-sheet");
+        });
+
+        /* ── MODAL 3: Contact Us ─────────────────────────────────── */
+        document.getElementById("contact-overlay").addEventListener("click", function () {
+            closeSheet("contact-overlay", "contact-sheet");
+        });
+        document.getElementById("contact-close-btn").addEventListener("click", function () {
+            closeSheet("contact-overlay", "contact-sheet");
+        });
+
+    </script>
+
+</body>
+</html>

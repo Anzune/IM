@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reservations // Silid Isko</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="solar--exit-bold" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11.344 3.793C9.964 2.887 8 3.87 8 5.525V8H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3v2.475c0 1.656 1.964 2.638 3.344 1.732l6.684-4.386a2 2 0 0 0 0-3.342zm5.469 5.691a1 1 0 0 1 1.414 0l1.586 1.586a1.5 1.5 0 0 1 0 2.122l-1.586 1.586a1 1 0 0 1-1.414-1.414l.879-.879H16a1 1 0 1 1 0-2h1.293l-.879-.879a1 1 0 0 1 0-1.122z"/>
+        </symbol>
+        <symbol id="fluent--note-28-filled" viewBox="0 0 28 28">
+            <path fill="currentColor" d="M6 4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6Zm3 6.25A.75.75 0 0 1 9.75 9.5h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 9 10.25Zm0 4A.75.75 0 0 1 9.75 13.5h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 9 14.25Zm.75 3.25h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1 0-1.5Z"/>
+        </symbol>
+        <symbol id="tabler--trash-filled" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M17 4h3a1 1 0 0 1 0 2h-1v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6H4a1 1 0 0 1 0-2h3V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1Zm-2 0V4H9v0h6ZM9 9a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1Zm6 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1Z"/>
+        </symbol>
+        <symbol id="si--alert-fill" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </symbol>
+        <symbol id="ion--qr-code" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3 3h7v7H3V3Zm1 1v5h5V4H4Zm1 1h3v3H5V5Zm8-2h7v7h-7V3Zm1 1v5h5V4h-5Zm1 1h3v3h-3V5ZM3 13h7v7H3v-7Zm1 1v5h5v-5H4Zm1 1h3v3H5v-3Zm8 0h2v2h-2v-2Zm3 0h1v1h1v1h-1v1h1v1h-2v-1h-1v1h-1v-2h1v-1h1v-1Zm-3 3h1v1h1v1h-2v-2Zm3 1h1v2h-1v-2Zm-3-7h1v1h-1v-1Zm2 0h2v2h-1v-1h-1v-1Zm1 3h2v1h-1v1h-1v-2Z"/>
+        </symbol>
+    </svg>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-top">
+            <div class="brand">
+                <div class="brand-icon">
+                    <iconify-icon icon="pinhead:room" width="18" height="18"></iconify-icon>
+                </div>
+                <span class="brand-name">Silid Isko</span>
+            </div>
+            <button class="menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <a href="home.html" class="back-link">&#8249; Back to homepage</a>
+        <div class="page-title">
+            <div class="page-title-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 28 28"><use href="#fluent--note-28-filled"/></svg>
+            </div>
+            <div>
+                <h1>My<br>Reservations</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENU MODAL -->
+    <div class="gm-overlay" id="menu-modal-overlay"></div>
+    <div class="gm-sheet menu-modal-sheet" id="menu-modal-sheet" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="gm-handle"></div>
+        <ul class="menu-modal-nav">
+            <li><a href="users.html">USER PROFILE</a></li>
+            <li><a href="myreserve.html">RESERVATIONS</a></li>
+        </ul>
+        <div class="menu-modal-footer">
+            <button class="menu-modal-logout-btn" id="menu-modal-logout-btn">Log out</button>
+        </div>
+    </div>
+
+    <!-- LOGOUT MODAL -->
+    <div class="gm-overlay" id="logout-modal-overlay"></div>
+    <div class="gm-sheet logout-modal-sheet" id="logout-modal-sheet" role="dialog" aria-modal="true" aria-label="Confirm logout">
+        <div class="gm-handle"></div>
+        <div class="logout-modal-hero">
+            <div class="logout-modal-hero-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#solar--exit-bold"/></svg>
+            </div>
+            <div class="logout-modal-hero-title">Logging out?</div>
+        </div>
+        <p class="logout-modal-subtext">Are you sure you want to end your session and return to the main landing page?</p>
+        <div class="logout-modal-actions">
+            <button class="logout-modal-cancel-btn" id="logout-modal-cancel-btn">Cancel</button>
+            <a href="index.html" class="logout-modal-confirm-btn">Log out</a>
+        </div>
+    </div>
+
+    <!-- MAIN SCROLL AREA -->
+    <main class="mr-scroll">
+        <a href="reserve.html" class="mr-reserve-btn">+ &nbsp;Reserve Room</a>
+
+        <p class="mr-section-label">RESERVATION STATUS</p>
+        <div class="mr-card" id="status-card">
+
+            <div class="mr-forfeiture-block" id="forfeiture-block">
+                <div class="mr-forfeiture-header">
+                    <iconify-icon icon="si:alert-fill" width="13" height="13"></iconify-icon>
+                    FORFEITURE PROTECTION ACTIVE
+                </div>
+                <div class="mr-timer-row">
+                    <span class="mr-timer-label">TIME REMAINING</span>
+                    <span class="mr-timer-value" id="mr-timer-display">25:00</span>
+                </div>
+                <div class="mr-progress-track">
+                    <div class="mr-progress-fill" id="mr-progress-fill" style="width:100%"></div>
+                </div>
+                <hr class="mr-forfeiture-divider">
+                <p class="mr-forfeiture-note">Reservation will be automatically cancelled if user does not confirm via QR within this time frame.</p>
+            </div>
+
+            <div class="mr-ongoing-block" id="ongoing-block" style="display:none">
+                <div class="mr-ongoing-header">
+                    <iconify-icon icon="mingcute:check-circle-fill" width="13" height="13"></iconify-icon>
+                    RESERVATION CONFIRMED
+                </div>
+                <div class="mr-ongoing-body">
+                    <div class="mr-ongoing-icon-wrap">
+                        <iconify-icon icon="mingcute:check-fill" width="18" height="18"></iconify-icon>
+                    </div>
+                    <div class="mr-ongoing-text">
+                        <strong>Room is now in use</strong>
+                        QR check-in confirmed. Your session is active.
+                    </div>
+                </div>
+                <hr class="mr-ongoing-divider">
+                <p class="mr-ongoing-note">✓ Check-in verified — enjoy your session!</p>
+            </div>
+
+            <div class="mr-cancelled-block" id="cancelled-block" style="display:none">
+                <div class="mr-cancelled-header">
+                    <iconify-icon icon="mingcute:close-circle-fill" width="13" height="13"></iconify-icon>
+                    RESERVATION CANCELLED
+                </div>
+                <div class="mr-cancelled-body">
+                    <div class="mr-cancelled-icon-wrap">
+                        <iconify-icon icon="mingcute:close-fill" width="18" height="18"></iconify-icon>
+                    </div>
+                    <div class="mr-cancelled-text">
+                        <strong>Room has been released</strong>
+                        This reservation was cancelled and is no longer active.
+                    </div>
+                </div>
+                <hr class="mr-cancelled-divider">
+                <p class="mr-cancelled-note">This reservation can no longer be used.</p>
+            </div>
+
+            <div class="mr-status-row">
+                <span class="mr-status-row-label">STATUS</span>
+                <span class="mr-status-badge awaiting" id="status-badge">AWAITING CONFIRMATION</span>
+            </div>
+        </div>
+
+        <p class="mr-section-label">RESERVATION INFO</p>
+        <div class="mr-card" id="res-info-card">
+            <div class="mr-info-row">
+                <span class="mr-info-label">ROOM</span>
+                <span class="mr-info-value" id="ri-room">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">DATE</span>
+                <span class="mr-info-value" id="ri-date">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">TIME</span>
+                <span class="mr-info-value" id="ri-time">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">YEAR &amp; COURSE</span>
+                <span class="mr-info-value" id="ri-yearcourse">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">SECTION</span>
+                <span class="mr-info-value" id="ri-section">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">PROF/INSTR.</span>
+                <span class="mr-info-value" id="ri-prof">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">PURPOSE</span>
+                <span class="mr-info-value" id="ri-purpose">—</span>
+            </div>
+        </div>
+
+        <div class="mr-card" id="res-meta-card">
+            <div class="mr-info-row">
+                <span class="mr-info-label">TIME RESERVED</span>
+                <span class="mr-info-value" id="ri-time-reserved">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">DATE RESERVED</span>
+                <span class="mr-info-value" id="ri-date-reserved">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">RESERVED BY</span>
+                <span class="mr-info-value" id="ri-reserved-by">—</span>
+            </div>
+            <div class="mr-info-row">
+                <span class="mr-info-label">RESERVATION ID</span>
+                <span class="mr-info-value" id="ri-res-id">—</span>
+            </div>
+
+            <a href="checkin.html" class="mr-scan-btn" id="scan-qr-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 512 512"><use href="#ion--qr-code"/></svg>
+                Scan QR
+            </a>
+
+            <button class="mr-cancel-btn" id="open-cancel-modal-btn" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#tabler--trash-filled"/></svg>
+                Cancel Reservation
+            </button>
+        </div>
+    </main>
+
+    <!-- CANCEL RESERVATION MODAL -->
+    <div class="mr-cancel-overlay" id="cancel-modal-overlay"></div>
+    <div class="mr-cancel-sheet" id="cancel-modal-sheet" role="dialog" aria-modal="true" aria-label="Cancel Reservation">
+        <div class="mr-cancel-handle"></div>
+        <div class="mr-cancel-hero">
+            <div class="mr-cancel-hero-top">
+                <div class="mr-cancel-hero-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#si--alert-fill"/></svg>
+                </div>
+                <div class="mr-cancel-hero-title">Cancel<br>Reservation</div>
+            </div>
+            <div class="mr-cancel-hero-sub" id="cancel-modal-subtext">
+                Are you sure you want to cancel your reservation for <strong id="cancel-room-name">this room</strong>? This action will release the room for other students to book.
+            </div>
+        </div>
+
+        <label class="mr-cancel-check-row" for="cancel-understand-check">
+            <input type="checkbox" id="cancel-understand-check">
+            <span class="mr-cancel-check-label">I understand this action cannot be undone</span>
+        </label>
+        <p class="mr-cancel-check-error" id="cancel-check-error">Please tick the checkbox to proceed.</p>
+
+        <button class="mr-cancel-confirm-btn" id="cancel-confirm-btn" type="button" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#tabler--trash-filled"/></svg>
+            Cancel Reservation
+        </button>
+
+        <button class="mr-cancel-close-btn" id="cancel-close-btn" type="button">Cancel</button>
+    </div>
+
+    <script>
+    'use strict';
+
+    /* ── Forfeiture timer ──────────────────────────────────────────────── */
+    const FORFEITURE_TOTAL_SECS = 25 * 60;
+    let activeTimer = null;
+
+    function startForfeitureTimer(initialSecs) {
+        stopForfeitureTimer();
+        let remaining = initialSecs || FORFEITURE_TOTAL_SECS;
+
+        function tick() {
+            const display = document.getElementById('mr-timer-display');
+            const fill = document.getElementById('mr-progress-fill');
+            if (!display || !fill) { stopForfeitureTimer(); return; }
+
+            const mins = String(Math.floor(remaining / 60)).padStart(2, '0');
+            const secs = String(remaining % 60).padStart(2, '0');
+            display.textContent = `${mins}:${secs}`;
+            fill.style.width = `${(remaining / FORFEITURE_TOTAL_SECS) * 100}%`;
+
+            if (remaining <= 0) {
+                stopForfeitureTimer();
+                const badge = document.getElementById('status-badge');
+                badge.textContent = 'CANCELLED (FORFEITED)';
+                badge.className = 'mr-status-badge cancelled';
+                document.getElementById('forfeiture-block').style.display = 'none';
+                document.getElementById('cancelled-block').style.display = '';
+                document.getElementById('scan-qr-btn').style.display = 'none';
+                document.getElementById('open-cancel-modal-btn').style.display = 'none';
+                return;
+            }
+            remaining--;
+        }
+
+        tick();
+        activeTimer = setInterval(tick, 1000);
+    }
+
+    function stopForfeitureTimer() {
+        if (activeTimer !== null) {
+            clearInterval(activeTimer);
+            activeTimer = null;
+        }
+    }
+
+    /* ── Empty state ────────────────────────────────────────────────────── */
+    function showEmptyState() {
+        document.getElementById('status-card').innerHTML = `
+            <div class="mr-no-res-icon">
+                <iconify-icon icon="fluent:note-add-16-filled" width="48" height="48"></iconify-icon>
+            </div>
+            <p class="mr-no-res-title">No active reservation</p>
+            <p class="mr-no-res-sub">You don't have any active reservations yet.</p>
+        `;
+        document.getElementById('status-card').style.textAlign = 'center';
+        document.getElementById('status-card').style.padding = '32px 16px';
+        const sections = document.querySelectorAll('.mr-section-label + .mr-card + .mr-section-label');
+        if (sections.length > 0) sections[0].style.display = 'none';
+        document.getElementById('res-info-card').style.display = 'none';
+        document.getElementById('res-meta-card').style.display = 'none';
+    }
+
+    /* ── Cancel Modal ──────────────────────────────────────────────────── */
+    const cancelOverlay = document.getElementById('cancel-modal-overlay');
+    const cancelSheet = document.getElementById('cancel-modal-sheet');
+    const cancelCheckbox = document.getElementById('cancel-understand-check');
+    const cancelConfirmBtn = document.getElementById('cancel-confirm-btn');
+    const cancelCheckRow = document.querySelector('.mr-cancel-check-row');
+    const cancelCheckError = document.getElementById('cancel-check-error');
+
+    function openCancelModal() {
+        cancelCheckbox.checked = false;
+        cancelConfirmBtn.disabled = true;
+        cancelConfirmBtn.classList.remove('active');
+        cancelConfirmBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><use href="#tabler--trash-filled"/></svg> Cancel Reservation`;
+        cancelCheckRow.classList.remove('error');
+        cancelCheckError.classList.remove('visible');
+
+        cancelOverlay.classList.add('open');
+        cancelSheet.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCancelModal() {
+        cancelOverlay.classList.remove('open');
+        cancelSheet.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('open-cancel-modal-btn').addEventListener('click', openCancelModal);
+    document.getElementById('cancel-close-btn').addEventListener('click', closeCancelModal);
+    cancelOverlay.addEventListener('click', closeCancelModal);
+
+    cancelCheckbox.addEventListener('change', function() {
+        cancelConfirmBtn.disabled = !this.checked;
+        if (this.checked) {
+            cancelConfirmBtn.classList.add('active');
+            cancelCheckRow.classList.remove('error');
+            cancelCheckError.classList.remove('visible');
+        } else {
+            cancelConfirmBtn.classList.remove('active');
+        }
+    });
+
+    /* ── Menu modal ──────────────────────────────────────────────────── */
+    (function initMenuModal() {
+        const menuBtn = document.querySelector('.menu-btn');
+        const menuOverlay = document.getElementById('menu-modal-overlay');
+        const menuSheet = document.getElementById('menu-modal-sheet');
+        const logoutTrigger = document.getElementById('menu-modal-logout-btn');
+
+        function openMenuModal() {
+            menuOverlay.classList.add('open');
+            menuSheet.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenuModal() {
+            menuOverlay.classList.remove('open');
+            menuSheet.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', openMenuModal);
+        menuOverlay.addEventListener('click', closeMenuModal);
+
+        logoutTrigger.addEventListener('click', function() {
+            closeMenuModal();
+            setTimeout(openLogoutModal, 180);
+        });
+    })();
+
+    /* ── Logout confirm modal ────────────────────────────────────────── */
+    function openLogoutModal() {
+        const logoutOverlay = document.getElementById('logout-modal-overlay');
+        const logoutSheet = document.getElementById('logout-modal-sheet');
+        logoutOverlay.classList.add('open');
+        logoutSheet.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    (function initLogoutModal() {
+        const logoutOverlay = document.getElementById('logout-modal-overlay');
+        const logoutSheet = document.getElementById('logout-modal-sheet');
+        const cancelBtn = document.getElementById('logout-modal-cancel-btn');
+
+        function closeLogoutModal() {
+            logoutOverlay.classList.remove('open');
+            logoutSheet.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        cancelBtn.addEventListener('click', closeLogoutModal);
+        logoutOverlay.addEventListener('click', closeLogoutModal);
+    })();
+
+    // ============================================
+    // SUPABASE RESERVATION LOADER
+    // ============================================
+    (function initSupabaseReservation() {
+        // Store reservation data globally
+        window.currentReservationId = null;
+
+        // Load reservation
+        async function loadReservation() {
+            try {
+                // Wait for Supabase to load
+                if (!window.supabase) {
+                    await new Promise(resolve => {
+                        const check = setInterval(() => {
+                            if (window.supabase) {
+                                clearInterval(check);
+                                resolve();
+                            }
+                        }, 100);
+                    });
+                }
+
+                const { data: { user } } = await window.supabase.auth.getUser();
+                if (!user) {
+                    showEmptyState();
+                    return;
+                }
+
+                // Get active reservation
+                const { data, error } = await window.supabase
+                    .from('reservations')
+                    .select(`
+                        *,
+                        rooms:room_id (room_name, room_type)
+                    `)
+                    .eq('user_id', user.id)
+                    .in('status', ['pending', 'confirmed'])
+                    .gte('reservation_date', new Date().toISOString().split('T')[0])
+                    .order('reservation_date', { ascending: true })
+                    .limit(1)
+                    .maybeSingle();
+
+                if (error) throw error;
+
+                if (!data) {
+                    showEmptyState();
+                    return;
+                }
+
+                window.currentReservationId = data.id;
+
+                // Populate reservation info
+                document.getElementById('ri-room').textContent = data.rooms.room_name;
+                document.getElementById('ri-date').textContent = data.reservation_date;
+                document.getElementById('ri-time').textContent = `${data.start_time} – ${data.end_time}`;
+                document.getElementById('ri-yearcourse').textContent = data.year_level;
+                document.getElementById('ri-section').textContent = data.section;
+                document.getElementById('ri-prof').textContent = data.professor_name;
+                document.getElementById('ri-purpose').textContent = data.purpose;
+                document.getElementById('ri-res-id').textContent = data.id;
+                document.getElementById('ri-reserved-by').textContent = data.professor_name;
+                document.getElementById('ri-time-reserved').textContent = new Date(data.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                document.getElementById('ri-date-reserved').textContent = new Date(data.created_at).toLocaleDateString();
+                document.getElementById('cancel-room-name').textContent = `Room ${data.rooms.room_name}`;
+
+                // Set status badge
+                const statusBadge = document.getElementById('status-badge');
+                if (data.status === 'pending') {
+                    statusBadge.textContent = 'AWAITING CONFIRMATION';
+                    statusBadge.className = 'mr-status-badge awaiting';
+                    document.getElementById('forfeiture-block').style.display = '';
+                    document.getElementById('ongoing-block').style.display = 'none';
+                    document.getElementById('cancelled-block').style.display = 'none';
+                    // Calculate remaining time (25 minutes from creation)
+                    const created = new Date(data.created_at);
+                    const now = new Date();
+                    const elapsed = Math.floor((now - created) / 1000);
+                    const remaining = Math.max(0, 25 * 60 - elapsed);
+                    startForfeitureTimer(remaining);
+                } else if (data.status === 'confirmed') {
+                    statusBadge.textContent = 'CONFIRMED';
+                    statusBadge.className = 'mr-status-badge confirmed';
+                    document.getElementById('forfeiture-block').style.display = 'none';
+                    document.getElementById('ongoing-block').style.display = '';
+                    document.getElementById('cancelled-block').style.display = 'none';
+                } else {
+                    statusBadge.textContent = 'CANCELLED';
+                    statusBadge.className = 'mr-status-badge cancelled';
+                    document.getElementById('forfeiture-block').style.display = 'none';
+                    document.getElementById('ongoing-block').style.display = 'none';
+                    document.getElementById('cancelled-block').style.display = '';
+                    document.getElementById('scan-qr-btn').style.display = 'none';
+                    document.getElementById('open-cancel-modal-btn').style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error('Error loading reservation:', error);
+                showEmptyState();
+            }
+        }
+
+        // Cancel reservation
+        async function cancelReservation(reservationId) {
+            const { data, error } = await window.supabase
+                .from('reservations')
+                .update({
+                    status: 'cancelled',
+                    cancelled_at: new Date().toISOString()
+                })
+                .eq('id', reservationId)
+                .select()
+                .single();
+
+            if (error) throw error;
+            return data;
+        }
+
+        // Override cancel button
+        document.getElementById('cancel-confirm-btn').addEventListener('click', async function() {
+            if (!document.getElementById('cancel-understand-check').checked) {
+                document.getElementById('cancel-check-error').classList.add('visible');
+                return;
+            }
+
+            try {
+                const reservationId = window.currentReservationId;
+                if (!reservationId) throw new Error('No active reservation');
+
+                await cancelReservation(reservationId);
+
+                closeCancelModal();
+                stopForfeitureTimer();
+
+                const badge = document.getElementById('status-badge');
+                badge.textContent = 'CANCELLED';
+                badge.className = 'mr-status-badge cancelled';
+                document.getElementById('forfeiture-block').style.display = 'none';
+                document.getElementById('ongoing-block').style.display = 'none';
+                document.getElementById('cancelled-block').style.display = '';
+                document.getElementById('scan-qr-btn').style.display = 'none';
+                document.getElementById('open-cancel-modal-btn').style.display = 'none';
+
+                // Update room status in localStorage
+                const room = document.getElementById('ri-room').textContent;
+                localStorage.setItem('roomStatus', JSON.stringify({
+                    room: room,
+                    status: 'available'
+                }));
+
+                alert('✅ Reservation cancelled successfully.');
+
+            } catch (error) {
+                alert('❌ Error cancelling reservation: ' + error.message);
+            }
+        });
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadReservation);
+    })();
+    </script>
+</body>
+</html>
