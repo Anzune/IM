@@ -1,27 +1,44 @@
-require('dotenv').config();
-
 const express = require('express');
-const cors = require('cors');
+const bcrypt = require('bcrypt');
 const db = require('../db');
-const authRoutes = require('./routes/auth');
 
-const app = express();
+const router = express.Router();
 
-app.use(cors());
-app.use(express.json());
-app.use('/routes/auth', authRoutes);
+router.get('/test', (req, res) => {
+    res.json({ message: 'Auth route working' });
+});
 
-app.get('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT NOW() AS currentTime');
-        res.json(rows);
+        const {
+            email,
+            password,
+            first_name,
+            last_name
+        } = req.body;
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const [result] = await db.query(
+            `INSERT INTO users
+            (email,password,first_name,last_name)
+            VALUES (?,?,?,?)`,
+            [
+                email,
+                hashedPassword,
+                first_name,
+                last_name
+            ]
+        );
+
+        res.json({
+            success: true,
+            userId: result.insertId
+        });
+
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+module.exports = router;
